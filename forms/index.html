@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration &amp; Forms — BGWC Academy Arizona</title>
+  <meta name="description" content="Register your athlete, complete required waivers, and access all BGWC Academy Arizona forms in one place." />
+  <link rel="icon" type="image/png" href="../assets/BGWC_Academy_Logo_Transparent.png" />
+  <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    /* ---- Tab nav ---- */
+    .forms-nav {
+      background: var(--white);
+      border-bottom: 2px solid var(--cream-dark);
+      position: sticky;
+      top: 84px;
+      z-index: 50;
+    }
+    .forms-nav-inner {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      padding: 18px 22px;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(15,35,64,0.6);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .tab-btn:hover { color: var(--navy); }
+    .tab-btn.active { color: var(--navy); border-bottom-color: var(--red); }
+
+    /* ---- Tab panels ---- */
+    .tab-panel { display: none; padding: 64px 0; }
+    .tab-panel.active { display: block; }
+
+    /* ---- Form layout ---- */
+    .form-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .form-sidebar h2 {
+      color: var(--navy);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 0.95;
+      margin-bottom: 14px;
+    }
+    .form-sidebar p {
+      color: rgba(51,51,51,0.72);
+      font-size: 0.97rem;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .form-note {
+      background: rgba(15,35,64,0.05);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 12px 12px 0;
+      padding: 14px 16px;
+      font-size: 0.9rem;
+      color: rgba(51,51,51,0.76);
+      margin-bottom: 18px;
+    }
+    .form-note strong { color: var(--navy); }
+
+    /* ---- Google Form embed ---- */
+    .gform-wrap {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 2px solid rgba(15,35,64,0.1);
+      box-shadow: var(--shadow);
+      background: var(--white);
+    }
+    .gform-wrap iframe {
+      width: 100%;
+      min-height: 900px;
+      border: none;
+      display: block;
+    }
+
+    /* placeholder shown before real form URL is added */
+    .gform-placeholder {
+      background: var(--white);
+      border: 2px dashed rgba(201,164,74,0.5);
+      border-radius: var(--radius);
+      padding: 60px 40px;
+      text-align: center;
+    }
+    .gform-placeholder .placeholder-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: rgba(15,35,64,0.07);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 20px;
+    }
+    .gform-placeholder h3 {
+      color: var(--navy);
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .gform-placeholder p {
+      color: rgba(51,51,51,0.66);
+      font-size: 0.96rem;
+      max-width: 420px;
+      margin: 0 auto 22px;
+    }
+    .gform-placeholder code {
+      display: block;
+      background: rgba(15,35,64,0.06);
+      border: 1px solid rgba(15,35,64,0.1);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: monospace;
+      font-size: 0.88rem;
+      color: var(--navy);
+      margin: 0 auto;
+      max-width: 480px;
+      text-align: left;
+      word-break: break-all;
+    }
+
+    /* ---- Checklist sidebar ---- */
+    .checklist { display: grid; gap: 10px; margin-bottom: 24px; }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--cream);
+      border: 1px solid rgba(15,35,64,0.08);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+    .check-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      margin-top: 1px;
+    }
+    .check-dot svg { width: 12px; height: 12px; }
+    .check-item span { font-size: 0.93rem; font-weight: 600; color: var(--charcoal); }
+
+    /* ---- Google ecosystem info ---- */
+    .google-stack {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 32px;
+    }
+    .google-card {
+      background: var(--white);
+      border: 1px solid rgba(15,35,64,0.08);
+      border-radius: var(--radius);
+      padding: 26px 20px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(15,35,64,0.06);
+    }
+    .google-card .g-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+      font-size: 1.6rem;
+    }
+    .google-card h3 {
+      color: var(--navy);
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .google-card p { font-size: 0.9rem; color: rgba(51,51,51,0.72); line-height: 1.6; }
+
+    @media (max-width: 900px) {
+      .form-layout { grid-template-columns: 1fr; }
+      .google-stack { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .google-stack { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">
+        <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona logo" />
+      </div>
+      <div>
+        <div class="brand-name">BGWC Academy</div>
+        <div class="brand-sub">Arizona Division</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('header').querySelector('nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="../programs/index.html">Programs</a>
+      <a class="nav-link" href="../about/index.html">About</a>
+      <a class="nav-link" href="../coaches/index.html">Coaches</a>
+      <a class="nav-link" href="../schedule/index.html">Schedule</a>
+      <a class="nav-link" href="../gallery/index.html">Gallery</a>
+      <a class="nav-link" href="../blog/index.html">News</a>
+      <a class="nav-link" href="../store/index.html">Store</a>
+      <a class="nav-link" href="../community/index.html">Community</a>
+      <a class="nav-link" href="../resources/index.html">Resources</a>
+      <a class="nav-link" href="../donate/index.html">Donate</a>
+      <a class="btn btn-primary nav-cta" href="../forms/index.html">Register Now</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="eyebrow">Registration &amp; Forms</div>
+    <h1>Get Your Athlete<br><span style="color:var(--gold);">On the Mat.</span></h1>
+    <p>All registration, waiver, and intake forms are powered by Google Forms — submissions go directly to the coaching staff and are stored securely in Google Drive.</p>
+  </div>
+</div>
+
+<!-- ===================== TAB NAV ===================== -->
+<div class="forms-nav">
+  <div class="container forms-nav-inner">
+    <button class="tab-btn active" onclick="showTab('registration', this)">Registration</button>
+    <button class="tab-btn" onclick="showTab('waivers', this)">Required Waivers</button>
+    <button class="tab-btn" onclick="showTab('inquiry', this)">Program Inquiry</button>
+    <button class="tab-btn" onclick="showTab('contact', this)">Contact the Club</button>
+    <button class="tab-btn" onclick="showTab('howto', this)">How This Works</button>
+  </div>
+</div>
+
+<main>
+
+<!-- ===================== REGISTRATION TAB ===================== -->
+<div class="tab-panel active" id="tab-registration">
+  <div class="container form-layout">
+    <div class="form-sidebar">
+      <div class="eyebrow">Step 1</div>
+      <h2>Athlete Registration</h2>
+      <p>Complete this form to register your athlete for the current season. You will need to complete the required waivers after registration.</p>
+
+      <div class="form-note">
+        <strong>Note:</strong> This form goes directly to Coach David Walker and the BGWC Academy staff. You will receive a confirmation email once your registration is reviewed.
+      </div>
+
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-dot">
+            <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Athlete name, age, and date of birth</span>
+        </div>
+        <div class="check-item">
+          <div class="check-dot">
+            <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Parent or guardian contact information</span>
+        </div>
+        <div class="check-item">
+          <div class="check-dot">
+            <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Program selection: Little Lions or Youth Wrestling</span>
+        </div>
+        <div class="check-item">
+          <div class="check-dot">
+            <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Emergency contact and any relevant medical notes</span>
+        </div>
+      </div>
+
+      <p style="font-size:0.88rem;color:rgba(51,51,51,0.6);">After submitting, complete the <strong>Required Waivers</strong> tab above.</p>
+    </div>
+
+    <div>
+      <div class="gform-wrap">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeKeJePHo5-4gTpjTxycBlNBYwRTS7T_GeT-vZJc0zwnkGvMA/viewform?embedded=true" width="100%" height="1100" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== WAIVERS TAB ===================== -->
+<div class="tab-panel" id="tab-waivers">
+  <div class="container form-layout">
+    <div class="form-sidebar">
+      <div class="eyebrow">Step 2 — Required</div>
+      <h2>Required Waivers</h2>
+      <p>All participating athletes must have these forms on file before their first practice. The coaching staff reviews each submission.</p>
+
+      <div class="form-note">
+        <strong>Required for all athletes:</strong> These forms are not optional. Athletes without completed waivers on file cannot participate.
+      </div>
+
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-dot">
+            <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Participation &amp; liability waiver</span>
+        </div>
+        <div class="check-item">
+          <div class="check-dot">
+            <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Medical authorization form</span>
+        </div>
+        <div class="check-item">
+          <div class="check-dot">
+            <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Concussion acknowledgment</span>
+        </div>
+        <div class="check-item">
+          <div class="check-dot">
+            <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Photo and media release</span>
+        </div>
+        <div class="check-item">
+          <div class="check-dot">
+            <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Transportation release (if applicable)</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <style>
+        .waiver-grid { display: grid; gap: 14px; }
+        .waiver-card {
+          background: var(--white);
+          border: 1px solid rgba(15,35,64,0.1);
+          border-radius: 14px;
+          padding: 20px 22px;
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          box-shadow: 0 2px 8px rgba(15,35,64,0.06);
+          transition: box-shadow 0.15s;
+        }
+        .waiver-card:hover { box-shadow: 0 4px 16px rgba(15,35,64,0.12); }
+        .waiver-num {
+          width: 40px; height: 40px;
+          border-radius: 50%;
+          background: var(--navy);
+          color: var(--gold);
+          font-family: "Barlow Condensed", sans-serif;
+          font-size: 1.1rem;
+          font-weight: 800;
+          display: grid;
+          place-items: center;
+          flex: 0 0 auto;
+        }
+        .waiver-info { flex: 1; }
+        .waiver-info h4 {
+          color: var(--navy);
+          font-size: 1rem;
+          font-weight: 700;
+          margin-bottom: 3px;
+        }
+        .waiver-info p {
+          font-size: 0.85rem;
+          color: rgba(51,51,51,0.6);
+          margin: 0;
+          line-height: 1.4;
+        }
+        .waiver-badge {
+          font-size: 0.75rem;
+          font-weight: 700;
+          padding: 3px 10px;
+          border-radius: 999px;
+          margin-left: 8px;
+          vertical-align: middle;
+        }
+        .badge-required { background: #fde8e8; color: var(--red); }
+        .badge-optional { background: #e8f0fe; color: #1a56db; }
+        .waiver-dl {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: var(--navy);
+          color: var(--gold);
+          font-family: "Barlow Condensed", sans-serif;
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          padding: 9px 16px;
+          border-radius: 10px;
+          text-decoration: none;
+          flex: 0 0 auto;
+          transition: background 0.15s;
+        }
+        .waiver-dl:hover { background: #1a3660; }
+        .waiver-note {
+          background: rgba(15,35,64,0.04);
+          border-left: 4px solid var(--gold);
+          border-radius: 0 12px 12px 0;
+          padding: 14px 16px;
+          font-size: 0.88rem;
+          color: rgba(51,51,51,0.72);
+          margin-top: 20px;
+        }
+      </style>
+
+      <div class="waiver-grid">
+        <div class="waiver-card">
+          <div class="waiver-num">01</div>
+          <div class="waiver-info">
+            <h4>Participation &amp; Liability Waiver <span class="waiver-badge badge-required">Required</span></h4>
+            <p>General release of liability for participation in BGWC Academy wrestling activities.</p>
+          </div>
+          <a class="waiver-dl" href="../docs/BGWC_AZ_01_Participation_Waiver_Release.pdf" target="_blank">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+
+        <div class="waiver-card">
+          <div class="waiver-num">02</div>
+          <div class="waiver-info">
+            <h4>Medical Authorization <span class="waiver-badge badge-required">Required</span></h4>
+            <p>Authorizes coaching staff to seek emergency medical treatment if a parent cannot be reached.</p>
+          </div>
+          <a class="waiver-dl" href="../docs/BGWC_AZ_02_Medical_Authorization.pdf" target="_blank">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+
+        <div class="waiver-card">
+          <div class="waiver-num">03</div>
+          <div class="waiver-info">
+            <h4>Photo &amp; Video Release <span class="waiver-badge badge-required">Required</span></h4>
+            <p>Permission for BGWC Academy to use athlete photos and video for club promotion and social media.</p>
+          </div>
+          <a class="waiver-dl" href="../docs/BGWC_AZ_03_Photo_Video_Release.pdf" target="_blank">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+
+        <div class="waiver-card">
+          <div class="waiver-num">04</div>
+          <div class="waiver-info">
+            <h4>Code of Conduct <span class="waiver-badge badge-required">Required</span></h4>
+            <p>Athlete and parent agreement to uphold BGWC Academy standards of behavior and sportsmanship.</p>
+          </div>
+          <a class="waiver-dl" href="../docs/BGWC_AZ_04_Code_of_Conduct.pdf" target="_blank">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+
+        <div class="waiver-card">
+          <div class="waiver-num">05</div>
+          <div class="waiver-info">
+            <h4>Concussion Acknowledgment <span class="waiver-badge badge-required">Required</span></h4>
+            <p>Acknowledgment of concussion risks and return-to-play protocol per Arizona state requirements.</p>
+          </div>
+          <a class="waiver-dl" href="../docs/BGWC_AZ_05_Concussion_Acknowledgment.pdf" target="_blank">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+
+        <div class="waiver-card">
+          <div class="waiver-num">06</div>
+          <div class="waiver-info">
+            <h4>Transportation Release <span class="waiver-badge badge-optional">If Applicable</span></h4>
+            <p>Permission for club-arranged transportation to tournaments and away events.</p>
+          </div>
+          <a class="waiver-dl" href="../docs/BGWC_AZ_06_Transportation_Release.pdf" target="_blank">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+
+        <div class="waiver-card">
+          <div class="waiver-num">07</div>
+          <div class="waiver-info">
+            <h4>Dual Enrollment / Visitor Waiver <span class="waiver-badge badge-optional">If Applicable</span></h4>
+            <p>For athletes participating from another club or visiting for open mat sessions.</p>
+          </div>
+          <a class="waiver-dl" href="../docs/BGWC_AZ_07_Dual_Enrollment_Visitor.pdf" target="_blank">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+
+        <div class="waiver-card">
+          <div class="waiver-num">08</div>
+          <div class="waiver-info">
+            <h4>Social Media &amp; Communications Policy <span class="waiver-badge badge-required">Required</span></h4>
+            <p>Acknowledgment of club social media guidelines and communication expectations.</p>
+          </div>
+          <a class="waiver-dl" href="../docs/BGWC_AZ_08_Social_Media_Communications.pdf" target="_blank">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+
+      <div class="waiver-note">
+        <strong>How to submit:</strong> Download each required form, print it, sign it, and bring it to your first practice. Coach David Walker will collect them. Forms 06 and 07 are only needed if applicable to your athlete.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== INQUIRY TAB ===================== -->
+<div class="tab-panel" id="tab-inquiry">
+  <div class="container form-layout">
+    <div class="form-sidebar">
+      <div class="eyebrow">Just Looking</div>
+      <h2>Program Inquiry</h2>
+      <p>Not ready to register yet? Ask a question, learn about the programs, or schedule a visit to watch a practice. No pressure.</p>
+
+      <div class="form-note">
+        <strong>Response time:</strong> Coach David Walker typically responds within 24 to 48 hours. All inquiries are welcome.
+      </div>
+    </div>
+    <div>
+      <div class="gform-wrap">
+        <div class="gform-placeholder">
+          <div class="placeholder-icon">
+            <svg width="32" height="32" fill="none" stroke="#0F2340" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h3>Program Inquiry Form</h3>
+          <p>A simple Google Form — name, email, child's age, program of interest, and a free-text question field.</p>
+          <code>&lt;iframe src="https://docs.google.com/forms/d/e/YOUR_INQUIRY_FORM_ID/viewform?embedded=true" width="100%" height="750" frameborder="0"&gt;&lt;/iframe&gt;</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CONTACT TAB ===================== -->
+<div class="tab-panel" id="tab-contact">
+  <div class="container form-layout">
+    <div class="form-sidebar">
+      <div class="eyebrow">Get in Touch</div>
+      <h2>Contact the Club</h2>
+      <p>Use this form for general questions, media requests, sponsorship conversations, or anything else that does not fit the other forms.</p>
+
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-dot" style="background:var(--gold);">
+            <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <span>17600 W Olive Ave, Waddell, AZ 85355</span>
+        </div>
+        <div class="check-item">
+          <div class="check-dot" style="background:var(--gold);">
+            <svg fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 10.79a19.79 19.79 0 01-3.07-8.67A2 2 0 011.93 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          </div>
+          <span>Contact number to be listed here</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="gform-wrap">
+        <div class="gform-placeholder">
+          <div class="placeholder-icon">
+            <svg width="32" height="32" fill="none" stroke="#0F2340" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3>General Contact Form</h3>
+          <p>A Google Form with name, email, subject dropdown, and message. Submissions go to the club inbox.</p>
+          <code>&lt;iframe src="https://docs.google.com/forms/d/e/YOUR_CONTACT_FORM_ID/viewform?embedded=true" width="100%" height="750" frameborder="0"&gt;&lt;/iframe&gt;</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== HOW IT WORKS TAB ===================== -->
+<div class="tab-panel" id="tab-howto">
+  <div class="container">
+    <div class="section-head" style="max-width:900px;">
+      <div class="eyebrow">Google Workspace for BGWC Academy</div>
+      <h2>One place for everything.</h2>
+      <p>All club forms, submissions, rosters, and records run through Google's free suite. Here is how the system works and what each tool does for you.</p>
+    </div>
+
+    <div class="google-stack">
+      <div class="google-card">
+        <div class="g-icon" style="background:#e8f0fe;">📋</div>
+        <h3>Google Forms</h3>
+        <p>Build registration, waiver, inquiry, and contact forms for free. All submissions are captured automatically with no monthly cost.</p>
+      </div>
+      <div class="google-card">
+        <div class="g-icon" style="background:#e6f4ea;">📊</div>
+        <h3>Google Sheets</h3>
+        <p>Every form submission flows into a spreadsheet automatically. You see athlete rosters, waiver status, and contact lists in real time.</p>
+      </div>
+      <div class="google-card">
+        <div class="g-icon" style="background:#fce8e6;">📁</div>
+        <h3>Google Drive</h3>
+        <p>Store practice schedules, tournament rosters, club documents, and coach resources all in one shared folder your staff can access.</p>
+      </div>
+      <div class="google-card">
+        <div class="g-icon" style="background:#fff8e1;">📧</div>
+        <h3>Gmail</h3>
+        <p>Set up a club email like <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="127075657173717376777f6b52757f737b7e3c717d7f">[email&#160;protected]</a> or use a custom domain (bgwcacademy.com) for a professional address.</p>
+      </div>
+      <div class="google-card">
+        <div class="g-icon" style="background:#f3e8fd;">📅</div>
+        <h3>Google Calendar</h3>
+        <p>Publish a shared practice and tournament calendar families can subscribe to. Updates push automatically to every subscriber.</p>
+      </div>
+      <div class="google-card">
+        <div class="g-icon" style="background:#e8f5e9;">🔔</div>
+        <h3>Form Notifications</h3>
+        <p>Google Forms sends you an email every time a family submits. You can also set up conditional notifications for specific programs.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--navy);border-radius:var(--radius);padding:40px;margin-top:48px;color:var(--white);">
+      <div class="eyebrow">Setup Guide</div>
+      <h2 style="color:var(--white);font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:20px;">How to replace the placeholders above</h2>
+      <ol style="display:grid;gap:16px;padding-left:24px;">
+        <li style="color:rgba(255,255,255,0.82);font-size:0.97rem;line-height:1.65;"><strong style="color:var(--gold);">Go to forms.google.com</strong> and sign in with your club Gmail account.</li>
+        <li style="color:rgba(255,255,255,0.82);font-size:0.97rem;line-height:1.65;"><strong style="color:var(--gold);">Create a new form</strong> for each tab: Registration, Waivers, Inquiry, and Contact. Build your questions, set response destination to Google Sheets.</li>
+        <li style="color:rgba(255,255,255,0.82);font-size:0.97rem;line-height:1.65;"><strong style="color:var(--gold);">Get the embed code:</strong> Click Send &rarr; click the &lt;&gt; embed icon &rarr; copy the iframe HTML.</li>
+        <li style="color:rgba(255,255,255,0.82);font-size:0.97rem;line-height:1.65;"><strong style="color:var(--gold);">Open the forms/index.html file</strong> in a text editor and find the placeholder comments. Replace the entire <code style="background:rgba(255,255,255,0.1);padding:2px 8px;border-radius:6px;font-size:0.88rem;">&lt;div class="gform-placeholder"&gt;...&lt;/div&gt;</code> block with your copied iframe.</li>
+        <li style="color:rgba(255,255,255,0.82);font-size:0.97rem;line-height:1.65;"><strong style="color:var(--gold);">Save, commit, and push</strong> to GitHub. The live site updates within a minute.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona" />
+          <div><div class="footer-title">BGWC Academy Arizona</div></div>
+        </div>
+        <p class="footer-copy">A youth wrestling club built around discipline, character, and long-term development. Est. 2005.</p>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.48);margin-top:14px;">USA Wrestling Charter No. 2300052502</p>
+      </div>
+      <div>
+        <div class="footer-title">Location</div>
+        <p class="footer-copy">17600 West Olive Ave<br>Waddell, AZ 85355</p>
+      </div>
+      <div>
+                <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../programs/index.html">Programs</a>
+          <a href="../about/index.html">About Us</a>
+          <a href="../coaches/index.html">Coaches</a>
+          <a href="../schedule/index.html">Schedule</a>
+          <a href="../gallery/index.html">Gallery</a>
+          <a href="../blog/index.html">News &amp; Blog</a>
+          <a href="../store/index.html">Merch Store</a>
+          <a href="../community/index.html">Community (Band)</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../donate/index.html">Donate</a>
+          <a href="../forms/index.html">Register</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Forms</div>
+        <div class="footer-links">
+          <a href="index.html#tab-registration">Registration</a>
+          <a href="index.html#tab-waivers">Required Waivers</a>
+          <a href="index.html#tab-inquiry">Program Inquiry</a>
+          <a href="index.html#tab-contact">Contact the Club</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 BGWC Academy Arizona. All rights reserved.</span>
+      <span>Built with pride in Waddell, AZ</span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function showTab(name, btn) {
+    // hide all panels
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    // show selected
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+    // scroll to top of tab area
+    document.querySelector('.forms-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // allow hash links to open specific tabs
+  window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.lo
