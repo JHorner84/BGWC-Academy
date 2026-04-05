@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coaches — BGWC Academy Arizona</title>
+  <link rel="icon" type="image/png" href="../assets/BGWC_Academy_Logo_Transparent.png" />
+  <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    .coaches-intro { background: var(--cream); }
+    .coaches-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .coach-card { overflow: hidden; transition: transform 0.2s; }
+    .coach-card:hover { transform: translateY(-4px); }
+    .coach-photo {
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, #17345c, #0F2340);
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.4);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      overflow: hidden;
+    }
+    .coach-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .coach-body { padding: 26px; }
+    .coach-role {
+      display: inline-block;
+      color: var(--red);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .coach-body h3 {
+      color: var(--navy);
+      font-size: 1.7rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .coach-body p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(51,51,51,0.72);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    /* philosophy section */
+    .philosophy {
+      background: linear-gradient(180deg, #18345d, #13243B);
+      color: var(--white);
+    }
+    .philosophy .section-head h2 { color: var(--white); }
+    .philosophy .section-head p { color: rgba(255,255,255,0.78); }
+    .quote-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .quote-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,164,74,0.16);
+      border-radius: var(--radius);
+      padding: 30px 26px;
+      position: relative;
+    }
+    .quote-mark {
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 5rem;
+      font-weight: 800;
+      color: var(--gold);
+      opacity: 0.25;
+      line-height: 1;
+      margin-bottom: -24px;
+    }
+    .quote-card p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+    .quote-attr {
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    @media (max-width: 860px) {
+      .coaches-grid { grid-template-columns: 1fr 1fr; }
+      .quote-grid   { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .coaches-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">
+        <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona logo" />
+      </div>
+      <div>
+        <div class="brand-name">BGWC Academy</div>
+        <div class="brand-sub">Arizona Division</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('header').querySelector('nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="../programs/index.html">Programs</a>
+      <a class="nav-link" href="../about/index.html">About</a>
+      <a class="nav-link active" href="../coaches/index.html">Coaches</a>
+      <a class="nav-link" href="../schedule/index.html">Schedule</a>
+      <a class="nav-link" href="../gallery/index.html">Gallery</a>
+      <a class="nav-link" href="../blog/index.html">News</a>
+      <a class="nav-link" href="../store/index.html">Store</a>
+      <a class="nav-link" href="../community/index.html">Community</a>
+      <a class="nav-link" href="../resources/index.html">Resources</a>
+      <a class="nav-link" href="../donate/index.html">Donate</a>
+      <a class="btn btn-primary nav-cta" href="../forms/index.html">Register Now</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="eyebrow">Coaching Staff</div>
+    <h1>The People<br><span style="color:var(--gold);">In the Room.</span></h1>
+    <p>Leadership matters in a youth club. The coaches at BGWC Academy Arizona are here because they believe in the development of young athletes and hold themselves to the same standard they ask of the room.</p>
+  </div>
+</div>
+
+<main>
+
+<section class="coaches-intro">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Meet the Staff</div>
+      <h2>Coaches who take the work seriously.</h2>
+      <p>The coaching staff sets the tone. They are responsible for athlete development, room culture, and the trust that families place in this program.</p>
+    </div>
+    <div class="coaches-grid">
+
+      <article class="card coach-card">
+        <div class="coach-photo">
+          <!--  Replace with: <img src="../assets/david-walker.jpg" alt="Coach David Walker" /> -->
+          Head Coach Photo
+        </div>
+        <div class="coach-body">
+          <span class="coach-role">Head Coach</span>
+          <h3>David Walker</h3>
+          <p>Add David's full bio here: his background in wrestling, coaching philosophy, what he believes about youth development, and what families should know about his approach. This is one of the most trust-building elements on the entire site.</p>
+        </div>
+      </article>
+
+      <article class="card coach-card">
+        <div class="coach-photo">
+          <!-- Replace with actual coach photo -->
+          Assistant Coach Photo
+        </div>
+        <div class="coach-body">
+          <span class="coach-role">Assistant Coach</span>
+          <h3>Coach Profile</h3>
+          <p>Add supporting coach information here. Athlete development background, prior experience, and any context that helps parents feel confident in the staff leading practices and tournaments.</p>
+        </div>
+      </article>
+
+      <article class="card coach-card">
+        <div class="coach-photo">
+          <!-- Replace with actual photo or remove card -->
+          Club Support
+        </div>
+        <div class="coach-body">
+          <span class="coach-role">Club Support</span>
+          <h3>Staff or Volunteer</h3>
+          <p>This card supports future staff additions, volunteer coaches, or a third leadership role within the club. Update or remove as needed.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="philosophy">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Coaching Philosophy</div>
+      <h2>What this staff believes about development.</h2>
+      <p>Add real quotes or paraphrased philosophy from Head Coach David Walker. This section builds enormous parent trust when it is specific and authentic.</p>
+    </div>
+    <div class="quote-grid">
+      <div class="quote-card">
+        <div class="quote-mark">"</div>
+        <p>Replace this with an actual quote from Coach David Walker about why he coaches, what he wants athletes to take away from the room, or how he approaches youth development.</p>
+        <div class="quote-attr">— David Walker, Head Coach</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-mark">"</div>
+        <p>A second quote here about expectations, what the room culture looks like, or what separates BGWC Academy from a typical program. Authenticity here goes further than any marketing language.</p>
+        <div class="quote-attr">— David Walker, Head Coach</div>
+      </div>
+    </div>
+    <div class="btn-row" style="margin-top:36px;justify-content:center;">
+      <a class="btn btn-gold" href="../forms/index.html#tab-inquiry">Ask the Coaching Staff a Question</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona" />
+          <div><div class="footer-title">BGWC Academy Arizona</div></div>
+        </div>
+        <p class="footer-copy">A youth wrestling club built around discipline, character, and long-term development. Est. 2005.</p>
+      </div>
+      <div>
+        <div class="footer-title">Location</div>
+        <p class="footer-copy">17600 West Olive Ave<br>Waddell, AZ 85355</p>
+      </div>
+      <div>
+                <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../programs/index.html">Programs</a>
+          <a href="../about/index.html">About Us</a>
+          <a href="../coaches/index.html">Coaches</a>
+          <a href="../schedule/index.html">Schedule</a>
+          <a href="../gallery/index.html">Gallery</a>
+          <a href="../blog/index.html">News &amp; Blog</a>
+          <a href="../store/index.html">Merch Store</a>
+          <a href="../community/index.html">Community (Band)</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../donate/index.html">Donate</a>
+          <a href="../forms/index.html">Register</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Get Started</div>
+        <div class="footer-links">
+          <a href="../forms/index.html">Register Now</a>
+          <a href="../forms/index.html#tab-inquiry">Ask a Question</a>
+          <a href="../programs/index.html">View Programs</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 BGWC Academy Arizona. All rights reserved.</span>
+      <span>USA Wrestling Charter No. 2300052502</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

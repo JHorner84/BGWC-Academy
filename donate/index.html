@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate &amp; Support — BGWC Academy Arizona</title>
+  <link rel="icon" type="image/png" href="../assets/BGWC_Academy_Logo_Transparent.png" />
+  <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    .give-section { background: var(--cream); }
+    .give-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .give-copy h2 {
+      color: var(--navy);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 0.94;
+      margin-bottom: 16px;
+    }
+    .give-copy p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(51,51,51,0.72);
+      font-size: 1rem;
+      line-height: 1.68;
+      margin-bottom: 16px;
+    }
+
+    /* Google Pay / donation form placeholder */
+    .donate-form-card {
+      background: var(--white);
+      border: 2px solid rgba(201,164,74,0.25);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+    .donate-form-card h3 {
+      color: var(--navy);
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .donate-form-card p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(51,51,51,0.7);
+      font-size: 0.94rem;
+      margin-bottom: 22px;
+    }
+    .amount-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .amount-btn {
+      background: rgba(15,35,64,0.05);
+      border: 2px solid rgba(15,35,64,0.1);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--navy);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .amount-btn:hover, .amount-btn.active {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+    .donate-note {
+      background: rgba(201,164,74,0.1);
+      border: 1px solid rgba(201,164,74,0.3);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      color: rgba(51,51,51,0.76);
+      margin-top: 16px;
+    }
+    .donate-note strong { color: var(--navy); }
+
+    /* Tax credit section */
+    .taxcredit-section {
+      background: linear-gradient(180deg, #18345d, #13243B);
+      color: var(--white);
+    }
+    .taxcredit-section .section-head h2 { color: var(--white); }
+    .taxcredit-section .section-head p  { color: rgba(255,255,255,0.78); }
+    .taxcredit-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .taxcredit-copy p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      line-height: 1.68;
+      margin-bottom: 16px;
+    }
+    .credit-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,164,74,0.22);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .credit-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.93rem;
+    }
+    .credit-row:last-child { border-bottom: none; }
+    .credit-row .clabel { color: rgba(255,255,255,0.6); }
+    .credit-row .cvalue { color: var(--white); font-weight: 700; }
+
+    /* Sponsor tiers */
+    .sponsor-section { background: var(--cream-dark); }
+    .sponsor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .sponsor-card { overflow: hidden; }
+    .sponsor-tier {
+      padding: 6px 16px;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .tier-bronze .sponsor-tier { background: #cd7f32; color: white; }
+    .tier-silver .sponsor-tier { background: #a8a9ad; color: white; }
+    .tier-gold   .sponsor-tier { background: var(--gold); color: var(--navy); }
+    .sponsor-body { padding: 26px; }
+    .sponsor-amount {
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .sponsor-body h3 {
+      color: var(--navy);
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .sponsor-perks { display: grid; gap: 8px; margin-bottom: 22px; }
+    .sponsor-perks li {
+      font-size: 0.92rem;
+      color: rgba(51,51,51,0.74);
+      padding-left: 16px;
+      position: relative;
+    }
+    .sponsor-perks li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      position: absolute;
+      left: 0;
+      top: 0.52em;
+      transform: translateY(-50%);
+    }
+
+    @media (max-width: 900px) {
+      .give-grid, .taxcredit-grid { grid-template-columns: 1fr; }
+      .sponsor-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .sponsor-grid { grid-template-columns: 1fr; }
+      .amount-grid  { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">
+        <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona logo" />
+      </div>
+      <div>
+        <div class="brand-name">BGWC Academy</div>
+        <div class="brand-sub">Arizona Division</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('header').querySelector('nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="../programs/index.html">Programs</a>
+      <a class="nav-link" href="../about/index.html">About</a>
+      <a class="nav-link" href="../coaches/index.html">Coaches</a>
+      <a class="nav-link" href="../schedule/index.html">Schedule</a>
+      <a class="nav-link" href="../gallery/index.html">Gallery</a>
+      <a class="nav-link" href="../blog/index.html">News</a>
+      <a class="nav-link" href="../store/index.html">Store</a>
+      <a class="nav-link" href="../community/index.html">Community</a>
+      <a class="nav-link" href="../resources/index.html">Resources</a>
+      <a class="nav-link active" href="../donate/index.html">Donate</a>
+      <a class="btn btn-primary nav-cta" href="../forms/index.html">Register Now</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="eyebrow">Support the Club</div>
+    <h1>Invest in<br><span style="color:var(--gold);">These Athletes.</span></h1>
+    <p>Every dollar that comes into BGWC Academy Arizona goes toward developing young athletes. There are no paid administrators — the money reaches the mat.</p>
+  </div>
+</div>
+
+<main>
+
+<!-- ===================== GIVE ===================== -->
+<section class="give-section">
+  <div class="container give-grid">
+    <div class="give-copy">
+      <div class="eyebrow">Direct Support</div>
+      <h2>Give directly to the club.</h2>
+      <p>BGWC Academy Arizona is a community club. Direct donations fund mat equipment, tournament entry fees, team uniforms, and facility costs that keep the program accessible to every family.</p>
+      <p>Arizona residents may also be eligible for a dollar-for-dollar state tax credit for qualifying contributions. See the Tax Credit section below for details.</p>
+      <ul style="display:grid;gap:10px;margin-bottom:24px;">
+        <li style="background:rgba(15,35,64,0.05);border-radius:12px;padding:12px 16px;font-size:0.94rem;font-weight:600;color:var(--charcoal);">Equipment — mats, headgear, singlets</li>
+        <li style="background:rgba(15,35,64,0.05);border-radius:12px;padding:12px 16px;font-size:0.94rem;font-weight:600;color:var(--charcoal);">Tournament registration and travel support</li>
+        <li style="background:rgba(15,35,64,0.05);border-radius:12px;padding:12px 16px;font-size:0.94rem;font-weight:600;color:var(--charcoal);">Facility and operational costs</li>
+        <li style="background:rgba(15,35,64,0.05);border-radius:12px;padding:12px 16px;font-size:0.94rem;font-weight:600;color:var(--charcoal);">Financial assistance for athlete families</li>
+      </ul>
+    </div>
+
+    <div class="donate-form-card">
+      <h3>Give Now</h3>
+      <p>Choose an amount or enter a custom gift. Payment processing is handled through the link or form below.</p>
+      <div class="amount-grid">
+        <div class="amount-btn">$25</div>
+        <div class="amount-btn active">$50</div>
+        <div class="amount-btn">$100</div>
+        <div class="amount-btn">$250</div>
+        <div class="amount-btn">$500</div>
+        <div class="amount-btn">Other</div>
+      </div>
+      <!--
+        PAYMENT OPTIONS — choose one and replace the placeholder below:
+
+        OPTION 1: Google Pay / PayPal link button
+          Add a PayPal.me link or Venmo handle here. This is the
+          fastest setup for a small club.
+
+        OPTION 2: Google Form for donation tracking
+          Use a Google Form to collect donation intent and amount,
+          then follow up with the donor for payment.
+
+        OPTION 3: Cash App or Zelle QR code
+          Upload a QR code image here for direct transfer.
+      -->
+      <a class="btn btn-primary" href="../forms/index.html#tab-contact" style="width:100%;justify-content:center;margin-top:8px;">
+        Contact Us to Give
+      </a>
+      <div class="donate-note">
+        <strong>Note:</strong> Update this button with your actual payment link — PayPal, Venmo, Zelle, Cash App, or a Google Form. Replace the href above once your payment method is set up.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TAX CREDIT ===================== -->
+<section class="taxcredit-section" id="taxcredit">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Arizona Tax Credit</div>
+      <h2>Your donation could cost you nothing.</h2>
+      <p>Arizona allows qualified charitable contributions to certain organizations as a dollar-for-dollar state income tax credit. Talk to your tax advisor to confirm eligibility.</p>
+    </div>
+    <div class="taxcredit-grid">
+      <div class="taxcredit-copy">
+        <p>If BGWC Academy Arizona qualifies under the Arizona Charitable Tax Credit (or Extracurricular Activity Credit), Arizona residents who donate may be able to claim the full amount as a credit against their state income taxes — not just a deduction, a full credit.</p>
+        <p>This means a $200 donation could reduce your Arizona tax bill by $200. For families already paying state taxes, this is effectively a cost-free way to support the club.</p>
+        <p>Consult your tax professional to confirm eligibility and the correct form to use. BGWC Academy can provide documentation of your contribution.</p>
+        <a class="btn btn-gold" href="../forms/index.html#tab-contact">Request a Contribution Receipt</a>
+      </div>
+      <div class="credit-card">
+        <div class="credit-row"><span class="clabel">Credit type</span><span class="cvalue">Dollar for dollar</span></div>
+        <div class="credit-row"><span class="clabel">Individual limit</span><span class="cvalue">Verify current limit</span></div>
+        <div class="credit-row"><span class="clabel">Married filing jointly</span><span class="cvalue">Verify current limit</span></div>
+        <div class="credit-row"><span class="clabel">State</span><span class="cvalue">Arizona only</span></div>
+        <div class="credit-row"><span class="clabel">Consult</span><span class="cvalue">Your tax advisor</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SPONSORS ===================== -->
+<section class="sponsor-section" id="sponsor">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Sponsorship</div>
+      <h2>Become a sponsor.</h2>
+      <p>Local businesses that sponsor BGWC Academy Arizona support youth athletics in Waddell and the West Valley. Recognition is given at every level.</p>
+    </div>
+    <div class="sponsor-grid">
+
+      <article class="card sponsor-card tier-bronze">
+        <div class="sponsor-tier">Bronze Sponsor</div>
+        <div class="sponsor-body">
+          <div class="sponsor-amount">$250</div>
+          <h3>Bronze Level</h3>
+          <ul class="sponsor-perks">
+            <li>Name listed on the club website</li>
+            <li>Social media acknowledgment</li>
+            <li>Thank you at club events</li>
+          </ul>
+          <a class="btn btn-outline-navy" href="../forms/index.html#tab-contact">Become a Bronze Sponsor</a>
+        </div>
+      </article>
+
+      <article class="card sponsor-card tier-silver">
+        <div class="sponsor-tier">Silver Sponsor</div>
+        <div class="sponsor-body">
+          <div class="sponsor-amount">$500</div>
+          <h3>Silver Level</h3>
+          <ul class="sponsor-perks">
+            <li>Logo on club website with link</li>
+            <li>Banner at tournament events</li>
+            <li>Featured social media post</li>
+            <li>Recognition in club communications</li>
+          </ul>
+          <a class="btn btn-outline-navy" href="../forms/index.html#tab-contact">Become a Silver Sponsor</a>
+        </div>
+      </article>
+
+      <article class="card sponsor-card tier-gold">
+        <div class="sponsor-tier">Gold Sponsor</div>
+        <div class="sponsor-body">
+          <div class="sponsor-amount">$1,000+</div>
+          <h3>Gold Level</h3>
+          <ul class="sponsor-perks">
+            <li>Prominent logo placement on website</li>
+            <li>Logo on team singlets or warmups</li>
+            <li>Banner at all club events</li>
+            <li>Social media feature</li>
+            <li>Named recognition at tournaments</li>
+          </ul>
+          <a class="btn btn-primary" href="../forms/index.html#tab-contact">Become a Gold Sponsor</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona" />
+          <div><div class="footer-title">BGWC Academy Arizona</div></div>
+        </div>
+        <p class="footer-copy">A youth wrestling club built around discipline, character, and long-term development. Est. 2005.</p>
+      </div>
+      <div>
+        <div class="footer-title">Location</div>
+        <p class="footer-copy">17600 West Olive Ave<br>Waddell, AZ 85355</p>
+      </div>
+      <div>
+                <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../programs/index.html">Programs</a>
+          <a href="../about/index.html">About Us</a>
+          <a href="../coaches/index.html">Coaches</a>
+          <a href="../schedule/index.html">Schedule</a>
+          <a href="../gallery/index.html">Gallery</a>
+          <a href="../blog/index.html">News &amp; Blog</a>
+          <a href="../store/index.html">Merch Store</a>
+          <a href="../community/index.html">Community (Band)</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../donate/index.html">Donate</a>
+          <a href="../forms/index.html">Register</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Support</div>
+        <div class="footer-links">
+          <a href="index.html">Give Now</a>
+          <a href="#taxcredit">AZ Tax Credit</a>
+          <a href="#sponsor">Become a Sponsor</a>
+          <a href="../forms/index.html#tab-contact">Contact the Club</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 BGWC Academy Arizona. All rights reserved.</span>
+      <span>USA Wrestling Charter No. 2300052502</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.amount-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

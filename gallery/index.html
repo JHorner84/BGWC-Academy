@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — BGWC Academy Arizona</title>
+  <link rel="icon" type="image/png" href="../assets/BGWC_Academy_Logo_Transparent.png" />
+  <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    .gallery-tabs {
+      background: var(--white);
+      border-bottom: 2px solid var(--cream-dark);
+      position: sticky;
+      top: 84px;
+      z-index: 50;
+    }
+    .gallery-tabs-inner {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+    .gtab-btn {
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      padding: 18px 22px;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(15,35,64,0.56);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .gtab-btn:hover { color: var(--navy); }
+    .gtab-btn.active { color: var(--navy); border-bottom-color: var(--gold); }
+
+    .gallery-panel { display: none; padding: 64px 0; background: var(--cream); }
+    .gallery-panel.active { display: block; }
+
+    .photo-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .photo-slot {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #17345c, #0F2340);
+      border-radius: 16px;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.4);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 0.2s;
+      cursor: pointer;
+      border: 1px solid rgba(201,164,74,0.1);
+    }
+    .photo-slot:hover { transform: scale(1.01); }
+    .photo-slot img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Google Photos embed note */
+    .gphotos-section {
+      background: var(--navy);
+      color: var(--white);
+      padding: 64px 0;
+    }
+    .gphotos-section .section-head h2 { color: var(--white); }
+    .gphotos-section .section-head p  { color: rgba(255,255,255,0.78); }
+    .gphotos-placeholder {
+      background: rgba(255,255,255,0.04);
+      border: 2px dashed rgba(201,164,74,0.3);
+      border-radius: var(--radius);
+      padding: 52px 40px;
+      text-align: center;
+    }
+    .gphotos-placeholder h3 {
+      color: var(--white);
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .gphotos-placeholder p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.96rem;
+      max-width: 540px;
+      margin: 0 auto 22px;
+    }
+
+    @media (max-width: 860px) {
+      .photo-grid-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .photo-grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">
+        <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona logo" />
+      </div>
+      <div>
+        <div class="brand-name">BGWC Academy</div>
+        <div class="brand-sub">Arizona Division</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('header').querySelector('nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="../programs/index.html">Programs</a>
+      <a class="nav-link" href="../about/index.html">About</a>
+      <a class="nav-link" href="../coaches/index.html">Coaches</a>
+      <a class="nav-link" href="../schedule/index.html">Schedule</a>
+      <a class="nav-link active" href="../gallery/index.html">Gallery</a>
+      <a class="nav-link" href="../blog/index.html">News</a>
+      <a class="nav-link" href="../store/index.html">Store</a>
+      <a class="nav-link" href="../community/index.html">Community</a>
+      <a class="nav-link" href="../resources/index.html">Resources</a>
+      <a class="nav-link" href="../donate/index.html">Donate</a>
+      <a class="btn btn-primary nav-cta" href="../forms/index.html">Register Now</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="eyebrow">Gallery</div>
+    <h1>Life of<br><span style="color:var(--gold);">The Club.</span></h1>
+    <p>Practice moments, tournament highlights, Little Lions milestones, and the team culture that makes BGWC Academy what it is.</p>
+  </div>
+</div>
+
+<div class="gallery-tabs">
+  <div class="container gallery-tabs-inner">
+    <button class="gtab-btn active" onclick="showGTab('practice', this)">Practice</button>
+    <button class="gtab-btn" onclick="showGTab('tournaments', this)">Tournaments</button>
+    <button class="gtab-btn" onclick="showGTab('little-lions', this)">Little Lions</button>
+    <button class="gtab-btn" onclick="showGTab('recognition', this)">Recognition</button>
+  </div>
+</div>
+
+<main>
+
+<div class="gallery-panel active" id="gtab-practice">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Practice</div>
+      <h2>Day to day on the mat.</h2>
+      <p>Add practice photos here — warmups, drilling, live wrestling, and room culture shots. Replace photo slots with real images as they are available.</p>
+    </div>
+    <div class="photo-grid-3">
+      <div class="photo-slot">Practice photo 1</div>
+      <div class="photo-slot">Practice photo 2</div>
+      <div class="photo-slot">Practice photo 3</div>
+      <div class="photo-slot">Practice photo 4</div>
+      <div class="photo-slot">Practice photo 5</div>
+      <div class="photo-slot">Practice photo 6</div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery-panel" id="gtab-tournaments">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Tournaments</div>
+      <h2>Competition moments.</h2>
+      <p>Match photos, podium shots, team warmups, and travel highlights from the season.</p>
+    </div>
+    <div class="photo-grid-3">
+      <div class="photo-slot">Tournament photo 1</div>
+      <div class="photo-slot">Tournament photo 2</div>
+      <div class="photo-slot">Tournament photo 3</div>
+      <div class="photo-slot">Tournament photo 4</div>
+      <div class="photo-slot">Tournament photo 5</div>
+      <div class="photo-slot">Tournament photo 6</div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery-panel" id="gtab-little-lions">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Little Lions</div>
+      <h2>The next generation.</h2>
+      <p>Little Lions practice photos, first-match moments, and the energy that younger athletes bring to the room.</p>
+    </div>
+    <div class="photo-grid-3">
+      <div class="photo-slot">Little Lions photo 1</div>
+      <div class="photo-slot">Little Lions photo 2</div>
+      <div class="photo-slot">Little Lions photo 3</div>
+      <div class="photo-slot">Little Lions photo 4</div>
+      <div class="photo-slot">Little Lions photo 5</div>
+      <div class="photo-slot">Little Lions photo 6</div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery-panel" id="gtab-recognition">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Recognition</div>
+      <h2>What the program has built.</h2>
+      <p>State placers, award photos, team accomplishments, and milestones from the program's history.</p>
+    </div>
+    <div class="photo-grid-3">
+      <div class="photo-slot">Recognition photo 1</div>
+      <div class="photo-slot">Recognition photo 2</div>
+      <div class="photo-slot">Recognition photo 3</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== GOOGLE PHOTOS ===================== -->
+<section class="gphotos-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Google Photos Integration</div>
+      <h2>Manage your full photo library.</h2>
+      <p>For bulk photo storage and sharing with families, use Google Photos. You can embed a shared album directly below — families see new photos automatically as they are added.</p>
+    </div>
+    <!--
+      HOW TO EMBED A GOOGLE PHOTOS ALBUM:
+      1. Go to photos.google.com
+      2. Create an album for each season or category
+      3. Click Share → Create shareable link
+      4. You can link to it directly OR use the embed URL:
+         https://photos.google.com/share/YOUR_ALBUM_ID
+      5. Google Photos does not support direct iframe embeds on
+         external sites, but you can link families directly to
+         the shared album URL from this section.
+      6. Alternatively, use Google Drive public folders and
+         embed a Drive folder view here.
+    -->
+    <div class="gphotos-placeholder">
+      <h3>Full Photo Library</h3>
+      <p>Create a shared Google Photos album for each season. Link families directly to the album, or embed a Google Drive folder view here. All photos upload from your phone and appear in the shared library automatically.</p>
+      <div class="btn-row" style="justify-content:center;">
+        <a class="btn btn-gold" href="https://photos.google.com" target="_blank" rel="noopener">Manage in Google Photos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona" />
+          <div><div class="footer-title">BGWC Academy Arizona</div></div>
+        </div>
+        <p class="footer-copy">A youth wrestling club built around discipline, character, and long-term development. Est. 2005.</p>
+      </div>
+      <div>
+        <div class="footer-title">Location</div>
+        <p class="footer-copy">17600 West Olive Ave<br>Waddell, AZ 85355</p>
+      </div>
+      <div>
+                <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../programs/index.html">Programs</a>
+          <a href="../about/index.html">About Us</a>
+          <a href="../coaches/index.html">Coaches</a>
+          <a href="../schedule/index.html">Schedule</a>
+          <a href="../gallery/index.html">Gallery</a>
+          <a href="../blog/index.html">News &amp; Blog</a>
+          <a href="../store/index.html">Merch Store</a>
+          <a href="../community/index.html">Community (Band)</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../donate/index.html">Donate</a>
+          <a href="../forms/index.html">Register</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Gallery</div>
+        <div class="footer-links">
+          <a href="#" onclick="showGTab('practice',this);return false;">Practice Photos</a>
+          <a href="#" onclick="showGTab('tournaments',this);return false;">Tournament Photos</a>
+          <a href="#" onclick="showGTab('little-lions',this);return false;">Little Lions</a>
+          <a href="#" onclick="showGTab('recognition',this);return false;">Recognition</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 BGWC Academy Arizona. All rights reserved.</span>
+      <span>USA Wrestling Charter No. 2300052502</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function showGTab(name, btn) {
+    document.querySelectorAll('.gallery-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.gtab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('gtab-' + name).classList.add('active');
+    if (btn && btn.classList) btn.classList.add('active');
+    document.querySelector('.gallery-tabs').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+</body>
+</html>

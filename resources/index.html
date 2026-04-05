@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parent Resources — BGWC Academy Arizona</title>
+  <link rel="icon" type="image/png" href="../assets/BGWC_Academy_Logo_Transparent.png" />
+  <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .resource-card {
+      padding: 32px;
+    }
+    .resource-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(15,35,64,0.07);
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+    }
+    .resource-icon svg { width: 24px; height: 24px; }
+    .resource-card h3 {
+      color: var(--navy);
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .resource-card p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(51,51,51,0.72);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .resource-links { display: grid; gap: 8px; }
+    .resource-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: rgba(15,35,64,0.04);
+      border: 1px solid rgba(15,35,64,0.08);
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--navy);
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .resource-link:hover { background: rgba(15,35,64,0.08); border-color: var(--gold); }
+    .resource-link::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex: 0 0 auto;
+    }
+
+    /* Rules section */
+    .rules-section {
+      background: linear-gradient(180deg, #18345d, #13243B);
+      color: var(--white);
+    }
+    .rules-section .section-head h2 { color: var(--white); }
+    .rules-section .section-head p  { color: rgba(255,255,255,0.78); }
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .rule-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,164,74,0.16);
+      border-radius: var(--radius);
+      padding: 26px 22px;
+    }
+    .rule-card h3 {
+      color: var(--gold);
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .rule-card p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.76);
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 860px) {
+      .resources-grid { grid-template-columns: 1fr; }
+      .rules-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .rules-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">
+        <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona logo" />
+      </div>
+      <div>
+        <div class="brand-name">BGWC Academy</div>
+        <div class="brand-sub">Arizona Division</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('header').querySelector('nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="../programs/index.html">Programs</a>
+      <a class="nav-link" href="../about/index.html">About</a>
+      <a class="nav-link" href="../coaches/index.html">Coaches</a>
+      <a class="nav-link" href="../schedule/index.html">Schedule</a>
+      <a class="nav-link" href="../gallery/index.html">Gallery</a>
+      <a class="nav-link" href="../blog/index.html">News</a>
+      <a class="nav-link" href="../store/index.html">Store</a>
+      <a class="nav-link" href="../community/index.html">Community</a>
+      <a class="nav-link active" href="../resources/index.html">Resources</a>
+      <a class="nav-link" href="../donate/index.html">Donate</a>
+      <a class="btn btn-primary nav-cta" href="../forms/index.html">Register Now</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="eyebrow">Parent Resources</div>
+    <h1>Everything<br><span style="color:var(--gold);">Families Need.</span></h1>
+    <p>Forms, rules, expectations, club support, and recognition all in one place. If you are looking for something and cannot find it, contact the coaching staff.</p>
+  </div>
+</div>
+
+<main>
+
+<section style="background:var(--cream);">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Resources</div>
+      <h2>Documents and links for families.</h2>
+      <p>All registration forms are on the Forms page. This section covers rules, expectations, club support, and recognition.</p>
+    </div>
+    <div class="resources-grid">
+
+      <article class="card resource-card">
+        <div class="resource-icon">
+          <svg fill="none" stroke="#0F2340" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <h3>Required Forms</h3>
+        <p>All registration and waiver forms are handled through Google Forms. Submit them before your athlete's first practice.</p>
+        <div class="resource-links">
+          <a class="resource-link" href="../forms/index.html">Athlete Registration</a>
+          <a class="resource-link" href="../forms/index.html#tab-waivers">Required Waivers</a>
+          <a class="resource-link" href="../forms/index.html#tab-waivers">Medical Authorization</a>
+          <a class="resource-link" href="../forms/index.html#tab-waivers">Concussion Acknowledgment</a>
+          <a class="resource-link" href="../forms/index.html#tab-waivers">Photo &amp; Media Release</a>
+        </div>
+      </article>
+
+      <article class="card resource-card">
+        <div class="resource-icon">
+          <svg fill="none" stroke="#0F2340" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Rules &amp; Expectations</h3>
+        <p>The club has clear standards for athletes, parents, and visitors. Reading and understanding these before the first practice is expected.</p>
+        <div class="resource-links">
+          <a class="resource-link" href="#athlete-code">Athlete Code of Conduct</a>
+          <a class="resource-link" href="#parent-expectations">Parent Expectations</a>
+          <a class="resource-link" href="#communication-policy">Communication Policy</a>
+          <a class="resource-link" href="#visitor-policy">Visitor Policy</a>
+        </div>
+      </article>
+
+      <article class="card resource-card">
+        <div class="resource-icon">
+          <svg fill="none" stroke="#0F2340" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <h3>Club Support</h3>
+        <p>Arizona allows qualifying charitable contributions as a dollar-for-dollar tax credit. Supporting the club also supports your tax return.</p>
+        <div class="resource-links">
+          <a class="resource-link" href="../donate/index.html">Direct Donations</a>
+          <a class="resource-link" href="../donate/index.html#taxcredit">Arizona Tax Credit Info</a>
+          <a class="resource-link" href="../donate/index.html#sponsor">Become a Sponsor</a>
+          <a class="resource-link" href="../donate/index.html">Fundraising</a>
+        </div>
+      </article>
+
+      <article class="card resource-card">
+        <div class="resource-icon">
+          <svg fill="none" stroke="#0F2340" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3 6.5L22 9.5l-5 4.8 1.2 6.7L12 18l-6.2 3 1.2-6.7L2 9.5l7-1z"/></svg>
+        </div>
+        <h3>Recognition</h3>
+        <p>State placers, club records, team accomplishments, and athlete development stories. This section grows with the program.</p>
+        <div class="resource-links">
+          <a class="resource-link" href="../gallery/index.html">Photo Gallery</a>
+          <a class="resource-link" href="#state-placers">State Placers &amp; Records</a>
+          <a class="resource-link" href="#roster">Current Roster</a>
+          <a class="resource-link" href="#news">Club News &amp; Updates</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="rules-section" id="rules">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Club Standards</div>
+      <h2>Rules protect the room.</h2>
+      <p>These are not suggestions. They apply to every athlete, parent, and visitor who enters the BGWC Academy program.</p>
+    </div>
+    <div class="rules-grid">
+
+      <div class="rule-card" id="athlete-code">
+        <h3>Athlete Code of Conduct</h3>
+        <p>Add the specific code of conduct for athletes here. Cover behavior during practice, tournaments, and travel. Be specific about what is expected and what the consequences are for violations.</p>
+      </div>
+
+      <div class="rule-card" id="parent-expectations">
+        <h3>Parent Expectations</h3>
+        <p>Add parent expectations here. Cover sideline behavior, communication with coaches, how and when to raise concerns, and what is not acceptable during practice or competition.</p>
+      </div>
+
+      <div class="rule-card" id="communication-policy">
+        <h3>Communication Policy</h3>
+        <p>Add the communication policy here. Specify how parents should contact coaches, response time expectations, and what channels are not appropriate for club business.</p>
+      </div>
+
+      <div class="rule-card" id="visitor-policy">
+        <h3>Visitor Policy</h3>
+        <p>Add the visitor policy here. Who can attend practice, where they should stand, what they cannot do, and the process for first-time visitors or prospective families.</p>
+      </div>
+
+      <div class="rule-card">
+        <h3>Equipment Standards</h3>
+        <p>Add gear requirements here. What athletes are expected to bring, what is provided, and what is required before the first practice. Wrestling shoes, singlet requirements, headgear rules.</p>
+      </div>
+
+      <div class="rule-card">
+        <h3>Safety &amp; Medical Policy</h3>
+        <p>Add the club's health and safety protocols here. Illness policy, injury reporting, return-to-participation guidelines, and concussion protocol consistent with USA Wrestling standards.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--cream-dark);padding:64px 0;text-align:center;">
+  <div class="container">
+    <div class="eyebrow">Questions?</div>
+    <h2 style="color:var(--navy);font-size:clamp(2rem,4vw,3.2rem);font-weight:800;margin-bottom:12px;">Cannot find what you need?</h2>
+    <p style="font-family:Lato,sans-serif;text-transform:none;letter-spacing:0;color:rgba(51,51,51,0.72);font-size:1rem;max-width:500px;margin:0 auto 26px;">Use the contact form and the coaching staff will respond within 48 hours.</p>
+    <a class="btn btn-primary" href="../forms/index.html#tab-contact">Contact the Club</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona" />
+          <div><div class="footer-title">BGWC Academy Arizona</div></div>
+        </div>
+        <p class="footer-copy">A youth wrestling club built around discipline, character, and long-term development. Est. 2005.</p>
+      </div>
+      <div>
+        <div class="footer-title">Location</div>
+        <p class="footer-copy">17600 West Olive Ave<br>Waddell, AZ 85355</p>
+      </div>
+      <div>
+                <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../programs/index.html">Programs</a>
+          <a href="../about/index.html">About Us</a>
+          <a href="../coaches/index.html">Coaches</a>
+          <a href="../schedule/index.html">Schedule</a>
+          <a href="../gallery/index.html">Gallery</a>
+          <a href="../blog/index.html">News &amp; Blog</a>
+          <a href="../store/index.html">Merch Store</a>
+          <a href="../community/index.html">Community (Band)</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../donate/index.html">Donate</a>
+          <a href="../forms/index.html">Register</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Resources</div>
+        <div class="footer-links">
+          <a href="../forms/index.html">Required Forms</a>
+          <a href="#rules">Rules &amp; Expectations</a>
+          <a href="../donate/index.html">Club Support</a>
+          <a href="../gallery/index.html">Recognition &amp; Photos</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 BGWC Academy Arizona. All rights reserved.</span>
+      <span>USA Wrestling Charter No. 2300052502</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

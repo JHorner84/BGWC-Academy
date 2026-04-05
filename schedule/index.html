@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schedule — BGWC Academy Arizona</title>
+  <link rel="icon" type="image/png" href="../assets/BGWC_Academy_Logo_Transparent.png" />
+  <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    .schedule-main { background: var(--cream); }
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-bottom: 48px;
+    }
+    .week-card {
+      border-top: 5px solid var(--navy);
+      padding: 28px;
+    }
+    .week-card.lions { border-top-color: var(--gold); }
+    .week-card.youth { border-top-color: var(--red); }
+    .week-card h3 {
+      color: var(--navy);
+      font-size: 1.7rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .week-card .program-type {
+      color: var(--red);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .week-card.lions .program-type { color: var(--gold); }
+    .day-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(15,35,64,0.07);
+      font-size: 0.95rem;
+    }
+    .day-row:last-child { border-bottom: none; }
+    .day-name { font-weight: 700; color: var(--navy); }
+    .day-time { color: rgba(51,51,51,0.66); }
+    .day-placeholder {
+      padding: 24px;
+      text-align: center;
+      color: rgba(51,51,51,0.5);
+      font-size: 0.92rem;
+      font-style: italic;
+      background: rgba(15,35,64,0.03);
+      border-radius: 14px;
+      border: 1px dashed rgba(15,35,64,0.12);
+    }
+
+    /* Google Calendar embed */
+    .calendar-section {
+      background: linear-gradient(180deg, #18345d, #13243B);
+      color: var(--white);
+    }
+    .calendar-section .section-head h2 { color: var(--white); }
+    .calendar-section .section-head p  { color: rgba(255,255,255,0.78); }
+    .gcal-wrap {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(201,164,74,0.24);
+      box-shadow: var(--shadow);
+    }
+    .gcal-wrap iframe {
+      width: 100%;
+      height: 640px;
+      border: none;
+      display: block;
+    }
+    .gcal-placeholder {
+      background: rgba(255,255,255,0.04);
+      border: 2px dashed rgba(201,164,74,0.3);
+      border-radius: var(--radius);
+      padding: 60px 40px;
+      text-align: center;
+    }
+    .gcal-placeholder h3 {
+      color: var(--white);
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .gcal-placeholder p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.96rem;
+      max-width: 520px;
+      margin: 0 auto 24px;
+    }
+    .gcal-placeholder code {
+      display: block;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-family: monospace;
+      font-size: 0.86rem;
+      color: var(--gold-light);
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: left;
+      word-break: break-all;
+    }
+
+    /* Tournament section */
+    .tournament-section { background: var(--cream-dark); }
+    .tournament-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .tournament-card {
+      padding: 24px;
+      border-left: 4px solid var(--gold);
+    }
+    .tournament-date {
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .tournament-card h3 {
+      color: var(--navy);
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .tournament-card p { color: rgba(51,51,51,0.7); font-size: 0.92rem; }
+
+    @media (max-width: 760px) {
+      .week-grid, .tournament-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">
+        <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona logo" />
+      </div>
+      <div>
+        <div class="brand-name">BGWC Academy</div>
+        <div class="brand-sub">Arizona Division</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('header').querySelector('nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="../programs/index.html">Programs</a>
+      <a class="nav-link" href="../about/index.html">About</a>
+      <a class="nav-link" href="../coaches/index.html">Coaches</a>
+      <a class="nav-link active" href="../schedule/index.html">Schedule</a>
+      <a class="nav-link" href="../gallery/index.html">Gallery</a>
+      <a class="nav-link" href="../blog/index.html">News</a>
+      <a class="nav-link" href="../store/index.html">Store</a>
+      <a class="nav-link" href="../community/index.html">Community</a>
+      <a class="nav-link" href="../resources/index.html">Resources</a>
+      <a class="nav-link" href="../donate/index.html">Donate</a>
+      <a class="btn btn-primary nav-cta" href="../forms/index.html">Register Now</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="eyebrow">Schedule</div>
+    <h1>Practice. Compete.<br><span style="color:var(--gold);">Show Up.</span></h1>
+    <p>Consistency is the foundation of development. Know when practice is, be there, and let the work compound over time.</p>
+  </div>
+</div>
+
+<main>
+
+<section class="schedule-main">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Weekly Practice</div>
+      <h2>Practice days at a glance.</h2>
+      <p>Update practice days and times below once the season schedule is confirmed. The Google Calendar below will stay current automatically.</p>
+    </div>
+
+    <div class="week-grid">
+      <div class="card week-card lions">
+        <div class="program-type">Little Lions Wrestling</div>
+        <h3>Little Lions</h3>
+        <div class="day-placeholder">Practice days and times to be confirmed. Update this section when the schedule is set.</div>
+      </div>
+      <div class="card week-card youth">
+        <div class="program-type">BGWC Youth Wrestling</div>
+        <h3>Youth Wrestling</h3>
+        <div class="day-placeholder">Practice days and times to be confirmed. Update this section when the schedule is set.</div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <div class="eyebrow">Location</div>
+      <h2>Where we practice.</h2>
+      <p>All practices are held at our Waddell facility. Families should arrive a few minutes early and follow the visitor policy.</p>
+    </div>
+    <div class="card" style="padding:28px;display:inline-flex;gap:20px;align-items:center;flex-wrap:wrap;">
+      <div>
+        <div style="font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:0.1em;font-size:0.84rem;color:var(--red);font-weight:700;margin-bottom:4px;">Practice Facility</div>
+        <div style="font-size:1.1rem;font-weight:700;color:var(--navy);">17600 West Olive Ave</div>
+        <div style="color:rgba(51,51,51,0.66);">Waddell, AZ 85355</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GOOGLE CALENDAR ===================== -->
+<section class="calendar-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Full Calendar</div>
+      <h2>Practices, tournaments, and club events.</h2>
+      <p>The live club calendar is embedded below. You can also subscribe to it in Google Calendar so updates come directly to your phone.</p>
+    </div>
+
+    <!--
+      ════════════════════════════════════════════════════════
+      HOW TO EMBED YOUR GOOGLE CALENDAR:
+      1. Go to calendar.google.com
+      2. On the left sidebar, find your club calendar
+      3. Click the three dots → Settings and sharing
+      4. Scroll to "Integrate calendar"
+      5. Copy the "Embed code" iframe
+      6. Replace the placeholder div below with that iframe
+      7. You can also share the "Public URL" so families can
+         subscribe on their own calendars
+      ════════════════════════════════════════════════════════
+    -->
+
+    <div class="gcal-wrap">
+      <!-- REPLACE THIS WITH YOUR GOOGLE CALENDAR IFRAME -->
+      <div class="gcal-placeholder">
+        <h3>Club Calendar</h3>
+        <p>Create a club Google Calendar at calendar.google.com, then embed it here. All practices, tournaments, and events will show live and update automatically for every visitor.</p>
+        <code>&lt;iframe src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=America%2FPhoenix" width="100%" height="640" frameborder="0"&gt;&lt;/iframe&gt;</code>
+        <div style="margin-top:22px;">
+          <a class="btn btn-gold" href="https://calendar.google.com" target="_blank" rel="noopener">Open Google Calendar</a>
+        </div>
+      </div>
+      <!-- END PLACEHOLDER -->
+    </div>
+
+    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(201,164,74,0.2);border-radius:12px;padding:14px 18px;font-size:0.9rem;color:rgba(255,255,255,0.78);">
+        <strong style="color:var(--gold);">Subscribe:</strong> Once the calendar is live, families can click "Add to Google Calendar" to get automatic updates on their own devices.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TOURNAMENTS ===================== -->
+<section class="tournament-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Competition</div>
+      <h2>Tournament calendar.</h2>
+      <p>Add upcoming tournaments here as the season develops. All BGWC Academy tournament entries are coordinated through the coaching staff.</p>
+    </div>
+    <div class="tournament-grid">
+      <div class="card tournament-card">
+        <div class="tournament-date">Date TBD</div>
+        <h3>Tournament Name</h3>
+        <p>Location and details to be filled in as the tournament calendar is confirmed for the season.</p>
+      </div>
+      <div class="card tournament-card">
+        <div class="tournament-date">Date TBD</div>
+        <h3>Tournament Name</h3>
+        <p>Location and details to be filled in as the tournament calendar is confirmed for the season.</p>
+      </div>
+      <div class="card tournament-card">
+        <div class="tournament-date">Date TBD</div>
+        <h3>Tournament Name</h3>
+        <p>Location and details to be filled in as the tournament calendar is confirmed for the season.</p>
+      </div>
+    </div>
+    <p style="margin-top:22px;font-size:0.9rem;color:rgba(51,51,51,0.6);">Tournament participation is coordinated by the coaching staff. Questions about specific events? <a href="../forms/index.html#tab-inquiry" style="color:var(--navy);font-weight:700;">Contact the club.</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona" />
+          <div><div class="footer-title">BGWC Academy Arizona</div></div>
+        </div>
+        <p class="footer-copy">A youth wrestling club built around discipline, character, and long-term development. Est. 2005.</p>
+      </div>
+      <div>
+        <div class="footer-title">Location</div>
+        <p class="footer-copy">17600 West Olive Ave<br>Waddell, AZ 85355</p>
+      </div>
+      <div>
+                <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../programs/index.html">Programs</a>
+          <a href="../about/index.html">About Us</a>
+          <a href="../coaches/index.html">Coaches</a>
+          <a href="../schedule/index.html">Schedule</a>
+          <a href="../gallery/index.html">Gallery</a>
+          <a href="../blog/index.html">News &amp; Blog</a>
+          <a href="../store/index.html">Merch Store</a>
+          <a href="../community/index.html">Community (Band)</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../donate/index.html">Donate</a>
+          <a href="../forms/index.html">Register</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Schedule</div>
+        <div class="footer-links">
+          <a href="#practice">Weekly Practice</a>
+          <a href="#tournaments">Tournament Calendar</a>
+          <a href="../forms/index.html">Register</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 BGWC Academy Arizona. All rights reserved.</span>
+      <span>USA Wrestling Charter No. 2300052502</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

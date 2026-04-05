@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News &amp; Blog — BGWC Academy Arizona</title>
+  <meta name="description" content="Club news, athlete spotlights, tournament recaps, and updates from BGWC Academy Arizona." />
+  <link rel="icon" type="image/png" href="../assets/BGWC_Academy_Logo_Transparent.png" />
+  <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    /* ── Blog layout ── */
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ── Post cards ── */
+    .posts-list { display: grid; gap: 28px; }
+    .post-card { overflow: hidden; transition: transform 0.2s; }
+    .post-card:hover { transform: translateY(-3px); }
+    .post-img {
+      aspect-ratio: 16/8;
+      background: linear-gradient(135deg, #17345c, #0F2340);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.3);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .post-img img { width: 100%; height: 100%; object-fit: cover; }
+    .post-body { padding: 26px; }
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    .post-cat {
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--red);
+      border-radius: 999px;
+      padding: 4px 12px;
+    }
+    .post-cat.gold { background: var(--gold); color: var(--navy); }
+    .post-cat.navy { background: var(--navy); color: var(--white); }
+    .post-date {
+      font-size: 0.88rem;
+      color: rgba(51,51,51,0.56);
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .post-body h2 {
+      color: var(--navy);
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .post-body p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(51,51,51,0.72);
+      font-size: 0.96rem;
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar { display: grid; gap: 24px; }
+    .sidebar-card { padding: 24px; }
+    .sidebar-card h3 {
+      color: var(--navy);
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--gold);
+    }
+
+    /* Newsletter signup */
+    .newsletter-card {
+      background: var(--navy);
+      border: none;
+      color: var(--white);
+    }
+    .newsletter-card h3 { color: var(--white); border-bottom-color: rgba(201,164,74,0.4); }
+    .newsletter-card p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.93rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .newsletter-note {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 10px;
+    }
+
+    /* ── Google Form newsletter embed ── */
+    .newsletter-embed {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(201,164,74,0.2);
+    }
+    .newsletter-embed iframe { width: 100%; border: none; display: block; }
+    .newsletter-placeholder {
+      background: rgba(255,255,255,0.05);
+      border: 1px dashed rgba(201,164,74,0.3);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .newsletter-placeholder p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 12px;
+    }
+    .newsletter-placeholder code {
+      display: block;
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: #e8c96a;
+      word-break: break-all;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: left;
+    }
+
+    /* Category links */
+    .cat-list { display: grid; gap: 8px; }
+    .cat-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: rgba(15,35,64,0.04);
+      border: 1px solid rgba(15,35,64,0.08);
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--navy);
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+    .cat-link:hover { background: rgba(15,35,64,0.08); }
+    .cat-count {
+      background: var(--gold);
+      color: var(--navy);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 2px 10px;
+    }
+
+    /* Band sidebar card -->
+    .band-card {
+      background: linear-gradient(135deg, #0F2340, #1a3660);
+      border: none;
+      text-align: center;
+      color: var(--white);
+    }
+    .band-card h3 { color: var(--gold); border-bottom-color: rgba(201,164,74,0.3); }
+    .band-logo-wrap {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(201,164,74,0.3);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+      font-size: 2rem;
+    }
+    .band-card p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    /* ── Category tabs ── */
+    .blog-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .btab {
+      background: none;
+      border: 2px solid rgba(15,35,64,0.15);
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(15,35,64,0.6);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btab:hover, .btab.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: var(--white);
+    }
+
+    /* ── Featured post ── */
+    .featured-post {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow);
+    }
+    .featured-img {
+      aspect-ratio: 16/7;
+      background: linear-gradient(135deg, #1a3a6e, #0F2340);
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.3);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      overflow: hidden;
+    }
+    .featured-img img { width: 100%; height: 100%; object-fit: cover; }
+    .featured-body { padding: 28px 32px; }
+    .featured-label {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 4px 14px;
+      margin-bottom: 12px;
+    }
+    .featured-body h2 {
+      color: var(--white);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 0.95;
+      margin-bottom: 12px;
+    }
+    .featured-body p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.97rem;
+      line-height: 1.65;
+      margin-bottom: 18px;
+      max-width: 640px;
+    }
+
+    @media (max-width: 960px) {
+      .blog-layout { grid-template-columns: 1fr; }
+      .sidebar { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 580px) {
+      .sidebar { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">
+        <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona logo" />
+      </div>
+      <div>
+        <div class="brand-name">BGWC Academy</div>
+        <div class="brand-sub">Arizona Division</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('header').querySelector('nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="../programs/index.html">Programs</a>
+      <a class="nav-link" href="../about/index.html">About</a>
+      <a class="nav-link" href="../coaches/index.html">Coaches</a>
+      <a class="nav-link" href="../schedule/index.html">Schedule</a>
+      <a class="nav-link" href="../gallery/index.html">Gallery</a>
+      <a class="nav-link active" href="index.html">News</a>
+      <a class="nav-link" href="../store/index.html">Store</a>
+      <a class="nav-link" href="../community/index.html">Community</a>
+      <a class="nav-link" href="../resources/index.html">Resources</a>
+      <a class="nav-link" href="../donate/index.html">Donate</a>
+      <a class="btn btn-primary nav-cta" href="../forms/index.html">Register Now</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="eyebrow">News &amp; Blog</div>
+    <h1>Club Updates.<br><span style="color:var(--gold);">Real Stories.</span></h1>
+    <p>Tournament recaps, athlete spotlights, club announcements, and everything happening inside the BGWC Academy program.</p>
+  </div>
+</div>
+
+<main>
+<section style="background:var(--cream);padding:64px 0;">
+  <div class="container">
+
+    <!-- Featured Post -->
+    <div class="featured-post">
+      <div class="featured-img">
+        <!-- Replace with: <img src="../assets/featured-post.jpg" alt="Featured post image" /> -->
+        Featured post image
+      </div>
+      <div class="featured-body">
+        <span class="featured-label">Featured</span>
+        <h2>Welcome to the BGWC Academy Arizona Website</h2>
+        <p>The club now has a home online. This is where you will find schedules, registration, news, and everything happening with the program. Add your first real post here to replace this placeholder.</p>
+        <div class="post-meta" style="margin-bottom:0;">
+          <span class="post-cat gold">Announcement</span>
+          <span class="post-date">April 2025</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-layout">
+      <!-- ── MAIN POSTS COLUMN ── -->
+      <div>
+        <!-- Category tabs -->
+        <div class="blog-tabs">
+          <button class="btab active" onclick="filterPosts('all',this)">All Posts</button>
+          <button class="btab" onclick="filterPosts('news',this)">Club News</button>
+          <button class="btab" onclick="filterPosts('tournament',this)">Tournaments</button>
+          <button class="btab" onclick="filterPosts('spotlight',this)">Athlete Spotlight</button>
+          <button class="btab" onclick="filterPosts('schedule',this)">Schedule Updates</button>
+        </div>
+
+        <!-- Posts -->
+        <div class="posts-list" id="posts-list">
+
+          <article class="card post-card" data-cat="tournament">
+            <div class="post-img">Tournament recap photo</div>
+            <div class="post-body">
+              <div class="post-meta">
+                <span class="post-cat">Tournament</span>
+                <span class="post-date">Add date</span>
+              </div>
+              <h2>Tournament Recap</h2>
+              <p>Add a tournament recap here. Cover how the team performed, athletes who placed, and what the coaches saw from the day. Families love reading specific results and coach observations.</p>
+              <a class="btn btn-outline-navy" href="#">Read More</a>
+            </div>
+          </article>
+
+          <article class="card post-card" data-cat="spotlight">
+            <div class="post-img">Athlete spotlight photo</div>
+            <div class="post-body">
+              <div class="post-meta">
+                <span class="post-cat navy">Athlete Spotlight</span>
+                <span class="post-date">Add date</span>
+              </div>
+              <h2>Athlete Spotlight</h2>
+              <p>Highlight an athlete from the program. Their story, their growth, what the coaches have noticed, and what the future looks like. These posts build enormous family trust and club culture.</p>
+              <a class="btn btn-outline-navy" href="#">Read More</a>
+            </div>
+          </article>
+
+          <article class="card post-card" data-cat="news">
+            <div class="post-img">Club news photo</div>
+            <div class="post-body">
+              <div class="post-meta">
+                <span class="post-cat gold">Club News</span>
+                <span class="post-date">Add date</span>
+              </div>
+              <h2>Club News Post</h2>
+              <p>Use this slot for general club announcements, program updates, new coach introductions, or any news that matters to the BGWC Academy family. Replace with real content as it happens.</p>
+              <a class="btn btn-outline-navy" href="#">Read More</a>
+            </div>
+          </article>
+
+        </div>
+
+        <!--
+          ════════════════════════════════════════════
+          HOW TO ADD NEW POSTS:
+          Copy the <article class="card post-card"> block above,
+          paste it at the top of #posts-list, and update:
+          - data-cat (news / tournament / spotlight / schedule)
+          - post-cat class and label text
+          - post-date
+          - h2 title
+          - p excerpt text
+          - img src if you have a photo
+
+          For a full blog with editing, consider connecting
+          a free Blogger or Substack feed, or using Google Sites
+          as a CMS with links back to this page.
+          ════════════════════════════════════════════
+        -->
+      </div>
+
+      <!-- ── SIDEBAR ── -->
+      <aside class="sidebar">
+
+        <!-- Newsletter signup (Google Form) -->
+        <div class="card newsletter-card sidebar-card">
+          <h3>Get Club Updates</h3>
+          <p>Enter your email to get tournament results, schedule changes, and club news delivered straight to your inbox.</p>
+          <!--
+            HOW TO ADD THE NEWSLETTER FORM:
+            1. Create a Google Form with just a Name and Email field
+            2. Set the title to "BGWC Academy Email Updates"
+            3. Click Send → embed icon → copy the iframe
+            4. Replace the placeholder below with that iframe
+               and set height to about 380px
+          -->
+          <div class="newsletter-placeholder">
+            <p>Create a Google Form with Name + Email fields, then paste the embed here.</p>
+            <code>&lt;iframe src="https://docs.google.com/forms/d/e/YOUR_NEWSLETTER_FORM_ID/viewform?embedded=true" width="100%" height="380" frameborder="0"&gt;&lt;/iframe&gt;</code>
+          </div>
+          <p class="newsletter-note">No spam. Club updates only. Unsubscribe anytime.</p>
+        </div>
+
+        <!-- Band app card -->
+        <div class="card band-card sidebar-card">
+          <h3>Join on Band</h3>
+          <div class="band-logo-wrap">📣</div>
+          <p>The coaching staff uses the Band app for real-time updates, practice changes, and team communication. Join the group to stay current.</p>
+          <a class="btn btn-gold" href="../community/index.html" style="width:100%;justify-content:center;">Join the Group</a>
+        </div>
+
+        <!-- Categories -->
+        <div class="card sidebar-card">
+          <h3>Categories</h3>
+          <div class="cat-list">
+            <div class="cat-link" onclick="filterPosts('all', null)">All Posts <span class="cat-count">3</span></div>
+            <div class="cat-link" onclick="filterPosts('tournament', null)">Tournaments <span class="cat-count">1</span></div>
+            <div class="cat-link" onclick="filterPosts('spotlight', null)">Athlete Spotlight <span class="cat-count">1</span></div>
+            <div class="cat-link" onclick="filterPosts('news', null)">Club News <span class="cat-count">1</span></div>
+            <div class="cat-link" onclick="filterPosts('schedule', null)">Schedule Updates <span class="cat-count">0</span></div>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona" />
+          <div><div class="footer-title">BGWC Academy Arizona</div></div>
+        </div>
+        <p class="footer-copy">A youth wrestling club built around discipline, character, and long-term development. Est. 2005.</p>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.48);margin-top:14px;">USA Wrestling Charter No. 2300052502</p>
+      </div>
+      <div>
+        <div class="footer-title">Location</div>
+        <p class="footer-copy">17600 West Olive Ave<br>Waddell, AZ 85355</p>
+      </div>
+      <div>
+        <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../programs/index.html">Programs</a>
+          <a href="../about/index.html">About</a>
+          <a href="../schedule/index.html">Schedule</a>
+          <a href="index.html">News &amp; Blog</a>
+          <a href="../store/index.html">Merch Store</a>
+          <a href="../community/index.html">Community</a>
+          <a href="../donate/index.html">Donate</a>
+          <a href="../forms/index.html">Register</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Stay Connected</div>
+        <div class="footer-links">
+          <a href="index.html">Club News</a>
+          <a href="../community/index.html">Band App Community</a>
+          <a href="../gallery/index.html">Photo Gallery</a>
+          <a href="../forms/index.html#tab-contact">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 BGWC Academy Arizona. All rights reserved.</span>
+      <span>USA Wrestling Charter No. 2300052502</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function filterPosts(cat, btn) {
+    document.querySelectorAll('.post-card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
+    });
+    if (btn) {
+      document.querySelectorAll('.btab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  }
+</script>
+</body>
+</html>

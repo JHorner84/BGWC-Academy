@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programs — BGWC Academy Arizona</title>
+  <meta name="description" content="Little Lions Wrestling and BGWC Youth Wrestling — two programs built for different stages of development at BGWC Academy Arizona." />
+  <link rel="icon" type="image/png" href="../assets/BGWC_Academy_Logo_Transparent.png" />
+  <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    .program-detail {
+      padding: 88px 0;
+      border-bottom: 1px solid rgba(15,35,64,0.08);
+    }
+    .program-detail:last-of-type { border-bottom: none; }
+    .program-detail:nth-child(even) {
+      background: linear-gradient(180deg, #f1e9da, #ede3d5);
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .detail-grid.reverse { direction: rtl; }
+    .detail-grid.reverse > * { direction: ltr; }
+
+    .detail-copy h2 {
+      color: var(--navy);
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 0.93;
+      margin-bottom: 14px;
+    }
+    .detail-copy p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(51,51,51,0.74);
+      font-size: 1rem;
+      line-height: 1.68;
+      margin-bottom: 18px;
+    }
+
+    .feature-list { display: grid; gap: 12px; margin-bottom: 28px; }
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.96rem;
+      color: rgba(51,51,51,0.8);
+      font-weight: 600;
+    }
+    .feature-list li::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex: 0 0 auto;
+      margin-top: 0.45em;
+    }
+
+    .detail-visual {
+      border-radius: 28px;
+      overflow: hidden;
+      border: 2px solid rgba(201,164,74,0.2);
+      box-shadow: var(--shadow);
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #17345c, #0F2340);
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.5);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .detail-visual img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* age badge */
+    .age-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: var(--gold);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 8px 16px;
+      margin-bottom: 18px;
+    }
+
+    /* comparison table */
+    .compare-section {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .compare-section .section-head h2 { color: var(--white); }
+    .compare-section .section-head p  { color: rgba(255,255,255,0.78); }
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .compare-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,164,74,0.18);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .compare-card h3 {
+      color: var(--gold);
+      font-size: 1.7rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .compare-card .sub {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.88rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: "Barlow Condensed", sans-serif;
+      margin-bottom: 22px;
+    }
+    .compare-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.93rem;
+    }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-row .label { color: rgba(255,255,255,0.6); }
+    .compare-row .value { color: var(--white); font-weight: 700; }
+
+    @media (max-width: 860px) {
+      .detail-grid, .detail-grid.reverse { grid-template-columns: 1fr; direction: ltr; }
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">
+        <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona logo" />
+      </div>
+      <div>
+        <div class="brand-name">BGWC Academy</div>
+        <div class="brand-sub">Arizona Division</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('header').querySelector('nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link active" href="../programs/index.html">Programs</a>
+      <a class="nav-link" href="../about/index.html">About</a>
+      <a class="nav-link" href="../coaches/index.html">Coaches</a>
+      <a class="nav-link" href="../schedule/index.html">Schedule</a>
+      <a class="nav-link" href="../gallery/index.html">Gallery</a>
+      <a class="nav-link" href="../blog/index.html">News</a>
+      <a class="nav-link" href="../store/index.html">Store</a>
+      <a class="nav-link" href="../community/index.html">Community</a>
+      <a class="nav-link" href="../resources/index.html">Resources</a>
+      <a class="nav-link" href="../donate/index.html">Donate</a>
+      <a class="btn btn-primary nav-cta" href="../forms/index.html">Register Now</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="eyebrow">Programs</div>
+    <h1>Two Programs.<br><span style="color:var(--gold);">One Academy.</span></h1>
+    <p>Little Lions is the starting point. Youth Wrestling is the core. Both are built on the same BGWC Academy standard of discipline, character, and consistent development.</p>
+  </div>
+</div>
+
+<main>
+
+<!-- ===================== LITTLE LIONS ===================== -->
+<section class="program-detail" id="little-lions">
+  <div class="container">
+    <div class="detail-grid">
+      <div class="detail-copy">
+        <div class="age-badge">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          Foundational Youth Program
+        </div>
+        <div class="eyebrow">Little Lions</div>
+        <h2>Little Lions Wrestling</h2>
+        <p>Little Lions is the bridge into the BGWC Academy. It keeps the club identity strong while giving younger wrestlers an approachable place to start before they are ready for the intensity of the core youth program.</p>
+        <p>The focus is on building confidence, listening skills, coordination, and the basic habits of a wrestler. Athletes learn how to enter a room, how to warm up, how to follow instruction, and how to compete with respect.</p>
+        <ul class="feature-list">
+          <li>Lower intensity entry point designed for younger athletes</li>
+          <li>Focus on confidence, coordination, and basic wrestling movement</li>
+          <li>Structure, listening, and accountability from day one</li>
+          <li>Transition pathway into the core Youth Wrestling program</li>
+          <li>Fun with purpose — every practice has a goal</li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="../forms/index.html">Register for Little Lions</a>
+          <a class="btn btn-outline-navy" href="../forms/index.html#tab-inquiry">Ask a Question</a>
+        </div>
+      </div>
+      <div class="detail-visual">
+        <img src="../assets/little-lions-flyer.jpg" alt="Little Lions Wrestling program" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== YOUTH WRESTLING ===================== -->
+<section class="program-detail" id="youth">
+  <div class="container">
+    <div class="detail-grid reverse">
+      <div class="detail-copy">
+        <div class="age-badge">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3 6.5L22 9.5l-5 4.8 1.2 6.7L12 18l-6.2 3 1.2-6.7L2 9.5l7-1z"/></svg>
+          Core Academy Program
+        </div>
+        <div class="eyebrow">Youth Wrestling</div>
+        <h2>BGWC Youth Wrestling</h2>
+        <p>This is the main program. Athletes in Youth Wrestling are held to a higher standard, trained with greater intensity, and developed with a clear eye on competition and long-term growth.</p>
+        <p>The coaching staff expects focus, effort, and respect every session. Athletes learn real technique, compete in USA Wrestling sanctioned events, and build the athletic and personal identity that defines a BGWC Academy wrestler.</p>
+        <ul class="feature-list">
+          <li>Higher intensity training with real technical development</li>
+          <li>USA Wrestling sanctioned competition preparation</li>
+          <li>Mat discipline, mental toughness, and team accountability</li>
+          <li>Consistent practice structure with measurable athlete growth</li>
+          <li>Team culture, records, recognition, and competitive identity</li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="../forms/index.html">Register for Youth Wrestling</a>
+          <a class="btn btn-outline-navy" href="../forms/index.html#tab-inquiry">Ask a Question</a>
+        </div>
+      </div>
+      <div class="detail-visual">
+        <img src="../assets/hero-wrestling.jpg" alt="BGWC Youth Wrestling program" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMPARISON ===================== -->
+<section class="compare-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Side by Side</div>
+      <h2>Which program is right?</h2>
+      <p>Not sure where your athlete fits? Here is a direct comparison. When in doubt, reach out and the coaching staff will help you decide.</p>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>Little Lions</h3>
+        <div class="sub">Foundational Program</div>
+        <div class="compare-row"><span class="label">Intensity</span><span class="value">Lower — entry level</span></div>
+        <div class="compare-row"><span class="label">Primary focus</span><span class="value">Confidence &amp; basics</span></div>
+        <div class="compare-row"><span class="label">Competition</span><span class="value">Optional / introductory</span></div>
+        <div class="compare-row"><span class="label">Best for</span><span class="value">First-time wrestlers</span></div>
+        <div class="compare-row"><span class="label">Pathway</span><span class="value">Leads to Youth Wrestling</span></div>
+      </div>
+      <div class="compare-card">
+        <h3>Youth Wrestling</h3>
+        <div class="sub">Core Academy Program</div>
+        <div class="compare-row"><span class="label">Intensity</span><span class="value">Higher — competitive</span></div>
+        <div class="compare-row"><span class="label">Primary focus</span><span class="value">Technical development</span></div>
+        <div class="compare-row"><span class="label">Competition</span><span class="value">USA Wrestling sanctioned</span></div>
+        <div class="compare-row"><span class="label">Best for</span><span class="value">Athletes ready for more</span></div>
+        <div class="compare-row"><span class="label">Pathway</span><span class="value">Long-term competitive</span></div>
+      </div>
+    </div>
+    <div class="btn-row" style="margin-top:36px;justify-content:center;">
+      <a class="btn btn-gold" href="../forms/index.html">Register Now</a>
+      <a class="btn btn-outline-white" href="../forms/index.html#tab-inquiry">Not sure? Ask us.</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona" />
+          <div><div class="footer-title">BGWC Academy Arizona</div></div>
+        </div>
+        <p class="footer-copy">A youth wrestling club built around discipline, character, and long-term development. Est. 2005.</p>
+      </div>
+      <div>
+        <div class="footer-title">Location</div>
+        <p class="footer-copy">17600 West Olive Ave<br>Waddell, AZ 85355</p>
+      </div>
+      <div>
+                <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../programs/index.html">Programs</a>
+          <a href="../about/index.html">About Us</a>
+          <a href="../coaches/index.html">Coaches</a>
+          <a href="../schedule/index.html">Schedule</a>
+          <a href="../gallery/index.html">Gallery</a>
+          <a href="../blog/index.html">News &amp; Blog</a>
+          <a href="../store/index.html">Merch Store</a>
+          <a href="../community/index.html">Community (Band)</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../donate/index.html">Donate</a>
+          <a href="../forms/index.html">Register</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Programs</div>
+        <div class="footer-links">
+          <a href="#little-lions">Little Lions Wrestling</a>
+          <a href="#youth">BGWC Youth Wrestling</a>
+          <a href="../forms/index.html">Register Now</a>
+          <a href="../forms/index.html#tab-inquiry">Program Inquiry</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 BGWC Academy Arizona. All rights reserved.</span>
+      <span>USA Wrestling Charter No. 2300052502</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

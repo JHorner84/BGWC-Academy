@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scholarships &amp; Sponsorship — BGWC Academy Arizona</title>
+  <link rel="icon" type="image/png" href="../assets/BGWC_Academy_Logo_Transparent.png" />
+  <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    .mission-band { background:var(--red);color:var(--white);padding:26px 0;text-align:center; }
+    .mission-band p { font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:0.12em;font-size:clamp(1rem,2.5vw,1.45rem);font-weight:700;margin:0; }
+    .mission-band span { color:var(--gold); }
+
+    .scholarship-grid { display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px; }
+    .scholarship-card { overflow:hidden; }
+    .scholarship-header { background:var(--navy);padding:28px 28px 22px;position:relative; }
+    .scholarship-header::after { content:"";position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--red),var(--gold)); }
+    .scholarship-num { font-family:"Barlow Condensed",sans-serif;font-size:4rem;font-weight:800;color:var(--gold);opacity:0.2;line-height:1;position:absolute;top:16px;right:24px; }
+    .scholarship-label { font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:0.14em;font-size:0.8rem;font-weight:700;color:var(--gold);margin-bottom:8px; }
+    .scholarship-header h3 { color:var(--white);font-size:1.65rem;font-weight:800;margin:0; }
+    .scholarship-body { padding:26px; }
+    .scholarship-body p { font-family:Lato,sans-serif;text-transform:none;letter-spacing:0;color:rgba(51,51,51,0.74);font-size:0.97rem;line-height:1.68;margin-bottom:18px; }
+    .scholarship-list { display:grid;gap:9px;margin-bottom:22px; }
+    .scholarship-list li { position:relative;padding-left:18px;font-size:0.93rem;color:rgba(51,51,51,0.76);font-weight:600; }
+    .scholarship-list li::before { content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);position:absolute;left:0;top:0.52em;transform:translateY(-50%); }
+
+    .sliding-section { background:linear-gradient(180deg,#18345d,#13243B);color:var(--white); }
+    .sliding-section .section-head h2 { color:var(--white); }
+    .sliding-section .section-head p  { color:rgba(255,255,255,0.78); }
+    .sliding-grid { display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center; }
+    .sliding-copy p { font-family:Lato,sans-serif;text-transform:none;letter-spacing:0;color:rgba(255,255,255,0.82);font-size:1rem;line-height:1.7;margin-bottom:16px; }
+    .dues-table { background:rgba(255,255,255,0.05);border:1px solid rgba(201,164,74,0.2);border-radius:var(--radius);overflow:hidden; }
+    .dues-row { display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,0.07); }
+    .dues-row:last-child { border-bottom:none; }
+    .dues-row.header { background:rgba(201,164,74,0.12);border-bottom:1px solid rgba(201,164,74,0.2); }
+    .dues-row.header span { font-family:"Barlow Condensed",sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold); }
+    .dues-label { color:rgba(255,255,255,0.82);font-size:0.95rem;font-weight:600; }
+    .dues-amount { font-family:"Barlow Condensed",sans-serif;font-size:1.3rem;font-weight:800;color:var(--white); }
+    .dues-note { font-size:0.82rem;color:rgba(255,255,255,0.5);margin-top:12px;font-family:Lato,sans-serif;text-transform:none;letter-spacing:0; }
+
+    .sponsor-section { background:var(--cream-dark); }
+    .sponsor-hero-card { background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:48px; }
+    .sponsor-hero-top { padding:48px;position:relative;overflow:hidden; }
+    .sponsor-hero-top::before { content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 50%,rgba(201,164,74,0.15),transparent 50%); }
+    .sponsor-hero-top::after { content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--red) 60%,var(--gold) 85%,transparent); }
+    .sponsor-badge { display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);font-family:"Barlow Condensed",sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;border-radius:999px;padding:6px 16px;margin-bottom:18px;position:relative;z-index:1; }
+    .sponsor-hero-top h2 { color:var(--white);font-size:clamp(2.2rem,4vw,3.5rem);font-weight:800;line-height:0.93;margin-bottom:14px;position:relative;z-index:1; }
+    .sponsor-hero-top h2 span { color:var(--gold); }
+    .sponsor-hero-top > p { font-family:Lato,sans-serif;text-transform:none;letter-spacing:0;color:rgba(255,255,255,0.82);font-size:1rem;line-height:1.68;max-width:580px;position:relative;z-index:1; }
+    .sponsor-value-grid { display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,0.08); }
+    .sponsor-value { padding:28px 24px;border-right:1px solid rgba(255,255,255,0.08);text-align:center; }
+    .sponsor-value:last-child { border-right:none; }
+    .sponsor-value-num { font-family:"Barlow Condensed",sans-serif;font-size:2.8rem;font-weight:800;color:var(--gold);line-height:1;margin-bottom:6px; }
+    .sponsor-value-label { font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:0.1em;font-size:0.82rem;font-weight:700;color:rgba(255,255,255,0.6); }
+    .sponsor-value-sub { font-family:Lato,sans-serif;text-transform:none;letter-spacing:0;font-size:0.82rem;color:rgba(255,255,255,0.48);margin-top:4px; }
+
+    .sponsor-form-layout { display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:start; }
+    .sponsor-why h3 { color:var(--navy);font-size:1.65rem;font-weight:800;margin-bottom:14px; }
+    .sponsor-why p { font-family:Lato,sans-serif;text-transform:none;letter-spacing:0;color:rgba(51,51,51,0.72);font-size:0.97rem;line-height:1.68;margin-bottom:14px; }
+    .impact-list { display:grid;gap:12px;margin-bottom:24px; }
+    .impact-item { display:flex;align-items:flex-start;gap:12px;background:var(--white);border:1px solid rgba(15,35,64,0.08);border-radius:14px;padding:14px 16px; }
+    .impact-icon { width:36px;height:36px;border-radius:10px;background:rgba(15,35,64,0.07);display:grid;place-items:center;flex:0 0 auto;font-size:1.1rem; }
+    .impact-text strong { display:block;font-size:0.92rem;font-weight:700;color:var(--navy);margin-bottom:2px; }
+    .impact-text span { font-size:0.84rem;color:rgba(51,51,51,0.62);font-family:Lato,sans-serif;text-transform:none;letter-spacing:0; }
+
+    .sponsor-form-wrap { background:var(--white);border:2px solid rgba(201,164,74,0.25);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow); }
+    .sponsor-form-wrap iframe { width:100%;min-height:820px;border:none;display:block; }
+    .sponsor-form-placeholder { padding:40px 32px;text-align:center; }
+    .sponsor-form-placeholder h3 { color:var(--navy);font-size:1.5rem;font-weight:800;margin-bottom:10px; }
+    .sponsor-form-placeholder p { font-family:Lato,sans-serif;text-transform:none;letter-spacing:0;color:rgba(51,51,51,0.66);font-size:0.95rem;margin-bottom:20px; }
+    .sponsor-form-placeholder code { display:block;background:rgba(15,35,64,0.05);border:1px solid rgba(15,35,64,0.1);border-radius:10px;padding:12px 16px;font-family:monospace;font-size:0.82rem;color:var(--navy);word-break:break-all;text-align:left; }
+
+    .sponsor-wall-section { background:var(--navy);color:var(--white);padding:64px 0; }
+    .sponsor-wall-section .section-head h2 { color:var(--white); }
+    .sponsor-wall-section .section-head p  { color:rgba(255,255,255,0.78); }
+    .sponsor-wall { display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
+    .sponsor-wall-placeholder { grid-column:1/-1;text-align:center;padding:32px;background:rgba(255,255,255,0.03);border:1px dashed rgba(201,164,74,0.25);border-radius:16px;color:rgba(255,255,255,0.4);font-family:Lato,sans-serif;text-transform:none;letter-spacing:0;font-size:0.95rem; }
+
+    @media (max-width:900px) {
+      .scholarship-grid,.sliding-grid,.sponsor-form-layout { grid-template-columns:1fr; }
+      .sponsor-value-grid { grid-template-columns:1fr; }
+      .sponsor-wall { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:560px) {
+      .sponsor-wall { grid-template-columns:1fr; }
+      .sponsor-hero-top { padding:28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="../index.html" class="brand">
+      <div class="brand-mark"><img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona logo" /></div>
+      <div><div class="brand-name">BGWC Academy</div><div class="brand-sub">Arizona Division</div></div>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('header').querySelector('nav').classList.toggle('open')"><span></span><span></span><span></span></button>
+    <nav>
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="../programs/index.html">Programs</a>
+      <a class="nav-link" href="../about/index.html">About</a>
+      <a class="nav-link" href="../coaches/index.html">Coaches</a>
+      <a class="nav-link" href="../schedule/index.html">Schedule</a>
+      <a class="nav-link" href="../gallery/index.html">Gallery</a>
+      <a class="nav-link" href="../blog/index.html">News</a>
+      <a class="nav-link" href="../store/index.html">Store</a>
+      <a class="nav-link" href="../community/index.html">Community</a>
+      <a class="nav-link" href="../resources/index.html">Resources</a>
+      <a class="nav-link active" href="index.html">Scholarships</a>
+      <a class="nav-link" href="../donate/index.html">Donate</a>
+      <a class="btn btn-primary nav-cta" href="../forms/index.html">Register Now</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="eyebrow">Scholarships &amp; Sponsorship</div>
+    <h1>No Kid Gets<br><span style="color:var(--gold);">Left Behind.</span></h1>
+    <p>Financial hardship should never be the reason an athlete does not compete. BGWC Academy Arizona offers annual scholarships, sliding scale dues, and a Sponsor-a-Wrestler program so every deserving kid gets on the mat.</p>
+  </div>
+</div>
+
+<div class="mission-band">
+  <div class="container">
+    <p>"No kid should be prevented from becoming a champion <span>because they are less fortunate.</span>"</p>
+  </div>
+</div>
+
+<main>
+
+<!-- SCHOLARSHIPS -->
+<section style="background:var(--cream);padding:88px 0;" id="scholarships">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Annual Scholarships</div>
+      <h2>Two full scholarships. Every year.</h2>
+      <p>Each season BGWC Academy Arizona awards two full scholarships to athletes who demonstrate need and commitment. These are not charity — they are an investment in athletes who have earned their place in the room.</p>
+    </div>
+    <div class="scholarship-grid">
+      <article class="card scholarship-card">
+        <div class="scholarship-header">
+          <div class="scholarship-num">01</div>
+          <div class="scholarship-label">Annual Scholarship</div>
+          <h3>Full Year Coverage</h3>
+        </div>
+        <div class="scholarship-body">
+          <p>One athlete receives full 12-month dues coverage — no financial barrier to participation. Selected by the coaching staff based on demonstrated need and commitment to the program.</p>
+          <ul class="scholarship-list">
+            <li>Full 12-month dues coverage</li>
+            <li>All program fees included</li>
+            <li>Athlete must remain in good standing</li>
+            <li>Renewable based on continued need and participation</li>
+          </ul>
+          <a class="btn btn-outline-navy" href="../forms/index.html#tab-contact">Apply or Inquire</a>
+        </div>
+      </article>
+      <article class="card scholarship-card">
+        <div class="scholarship-header">
+          <div class="scholarship-num">02</div>
+          <div class="scholarship-label">Annual Scholarship</div>
+          <h3>Full Year Coverage</h3>
+        </div>
+        <div class="scholarship-body">
+          <p>A second full scholarship awarded each season. No family that is serious about their athlete's development should walk away because of money — this scholarship makes sure they do not have to.</p>
+          <ul class="scholarship-list">
+            <li>Full 12-month dues coverage</li>
+            <li>All program fees included</li>
+            <li>Athlete must remain in good standing</li>
+            <li>Renewable based on continued need and participation</li>
+          </ul>
+          <a class="btn btn-outline-navy" href="../forms/index.html#tab-contact">Apply or Inquire</a>
+        </div>
+      </article>
+    </div>
+    <div style="background:var(--navy);border-radius:var(--radius);padding:32px 36px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:space-between;">
+      <div>
+        <div class="eyebrow" style="color:var(--gold);">How to Apply</div>
+        <p style="font-family:Lato,sans-serif;text-transform:none;letter-spacing:0;color:rgba(255,255,255,0.84);font-size:0.97rem;line-height:1.65;margin:0;max-width:640px;">Applications are handled directly and confidentially through the coaching staff. Reach out through the contact form or speak with Coach David Walker at practice. Every inquiry is treated with complete privacy.</p>
+      </div>
+      <a class="btn btn-gold" href="../forms/index.html#tab-contact" style="white-space:nowrap;flex:0 0 auto;">Contact the Club</a>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDING SCALE -->
+<section class="sliding-section" id="sliding">
+  <div class="container">
+    <div class="sliding-grid">
+      <div class="sliding-copy">
+        <div class="eyebrow">Sliding Scale</div>
+        <h2 style="color:var(--white);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:800;line-height:0.93;margin-bottom:16px;">We will work with every family.</h2>
+        <p>Beyond the two annual scholarships, BGWC Academy operates on a sliding scale for families who need it. If standard dues create a hardship, talk to the coaching staff. We will find a number that works.</p>
+        <p>This is not widely advertised because it is not a program — it is just how this club operates. If dues are a stretch, reach out privately. The conversation stays between you and the coaching staff.</p>
+        <a class="btn btn-gold" href="../forms/index.html#tab-contact" style="margin-top:8px;">Talk to the Coaching Staff</a>
+      </div>
+      <div>
+        <div class="dues-table">
+          <div class="dues-row header"><span>Family</span><span>Monthly Dues</span></div>
+          <div class="dues-row"><span class="dues-label">1 athlete</span><span class="dues-amount">$150 / mo</span></div>
+          <div class="dues-row"><span class="dues-label">2 athletes (same family)</span><span class="dues-amount">$200 / mo</span></div>
+          <div class="dues-row"><span class="dues-label">3 athletes (same family)</span><span class="dues-amount">$250 / mo</span></div>
+          <div class="dues-row"><span class="dues-label">4 athletes (same family)</span><span class="dues-amount">$300 / mo</span></div>
+          <div class="dues-row" style="background:rgba(201,164,74,0.08);">
+            <span class="dues-label" style="color:var(--gold);">Sliding scale available</span>
+            <span class="dues-amount" style="color:var(--gold);font-size:1rem;">Contact us</span>
+          </div>
+        </div>
+        <p class="dues-note">Each additional athlete in the same family adds $50/month to the base rate. Sliding scale available — contact the coaching staff privately.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSOR A WRESTLER -->
+<section class="sponsor-section" id="sponsor-a-wrestler">
+  <div class="container">
+    <div class="sponsor-hero-card">
+      <div class="sponsor-hero-top">
+        <div class="sponsor-badge">Sponsor a Wrestler</div>
+        <h2>Put a kid on the mat.<br><span>Change their trajectory.</span></h2>
+        <p>For $1,000 you can sponsor a BGWC Academy Arizona athlete for an entire year. Every dollar goes directly to that athlete's participation — no overhead, no fees. Just a kid who needed a chance and a community member who gave them one.</p>
+      </div>
+      <div class="sponsor-value-grid">
+        <div class="sponsor-value">
+          <div class="sponsor-value-num">$1,000</div>
+          <div class="sponsor-value-label">Full Year Sponsorship</div>
+          <div class="sponsor-value-sub">One athlete, 12 months</div>
+        </div>
+        <div class="sponsor-value">
+          <div class="sponsor-value-num">100%</div>
+          <div class="sponsor-value-label">Goes to the Athlete</div>
+          <div class="sponsor-value-sub">No overhead deducted</div>
+        </div>
+        <div class="sponsor-value">
+          <div class="sponsor-value-num">Your Call</div>
+          <div class="sponsor-value-label">Public or Private</div>
+          <div class="sponsor-value-sub">You choose recognition level</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sponsor-form-layout">
+      <div class="sponsor-why">
+        <h3>Why sponsor?</h3>
+        <p>Wrestling builds discipline, character, and resilience in ways most youth sports do not. The athletes in this program are being shaped into people who contribute to this community. Your sponsorship is an investment in that outcome.</p>
+        <p>You choose whether to sponsor a specific athlete or leave the selection to the coaching staff. You choose whether your name appears on the sponsor wall or stays private. All we ask is that you care about what happens to kids in this community.</p>
+        <div class="impact-list">
+          <div class="impact-item">
+            <div class="impact-icon">🏆</div>
+            <div class="impact-text">
+              <strong>12 months of competition</strong>
+              <span>Practice, tournaments, and full program access for one athlete</span>
+            </div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-icon">📣</div>
+            <div class="impact-text">
+              <strong>Recognition on Band (if public)</strong>
+              <span>Club community notified of your generosity if you choose public</span>
+            </div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-icon">🌐</div>
+            <div class="impact-text">
+              <strong>Sponsor wall on the website (if public)</strong>
+              <span>Named permanently on the BGWC Academy sponsor wall</span>
+            </div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-icon">✉️</div>
+            <div class="impact-text">
+              <strong>Personal thank-you from Coach David</strong>
+              <span>Every sponsor receives a personal note from the head coach</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sponsor-form-wrap">
+        <!--
+          BUILD THIS FORM IN GOOGLE FORMS:
+          Fields to include:
+          - Your name (short answer, required)
+          - Your email (short answer, required)
+          - Your phone (short answer)
+          - Sponsorship amount (multiple choice: $1,000 full year / Custom amount)
+          - Custom amount if other (short answer)
+          - Athlete to sponsor — leave blank to let coaching staff choose (paragraph, optional)
+          - Recognition preference (multiple choice):
+              "List my name publicly on the sponsor wall"
+              "Keep my sponsorship private"
+          - Message to the athlete or club (paragraph, optional)
+          - How did you hear about the sponsor program? (dropdown)
+          Then embed it here.
+        -->
+        <div class="sponsor-form-placeholder">
+          <h3>Sponsor Application</h3>
+          <p>Create this form in Google Forms with the fields listed in the code comment above, then paste the embed code here.</p>
+          <code>&lt;iframe src="https://docs.google.com/forms/d/e/YOUR_SPONSOR_FORM_ID/viewform?embedded=true" width="100%" height="820" frameborder="0"&gt;&lt;/iframe&gt;</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSOR WALL -->
+<section class="sponsor-wall-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Sponsor Wall</div>
+      <h2>Thank you to our sponsors.</h2>
+      <p>These are the people and businesses who invested in a BGWC Academy Arizona athlete. Their generosity keeps deserving kids in the room.</p>
+    </div>
+    <div class="sponsor-wall">
+      <div class="sponsor-wall-placeholder">Sponsor names will appear here as sponsorships are received. Be the first to put a kid on the mat.</div>
+    </div>
+    <div class="btn-row" style="margin-top:32px;justify-content:center;">
+      <a class="btn btn-gold" href="#sponsor-a-wrestler">Become a Sponsor</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona" />
+          <div><div class="footer-title">BGWC Academy Arizona</div></div>
+        </div>
+        <p class="footer-copy">A youth wrestling club built around discipline, character, and long-term development. Est. 2005.</p>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.48);margin-top:14px;">USA Wrestling Charter No. 2300052502</p>
+      </div>
+      <div>
+        <div class="footer-title">Location</div>
+        <p class="footer-copy">17600 West Olive Ave<br>Waddell, AZ 85355</p>
+      </div>
+      <div>
+        <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../programs/index.html">Programs</a>
+          <a href="../about/index.html">About</a>
+          <a href="../schedule/index.html">Schedule</a>
+          <a href="../blog/index.html">News &amp; Blog</a>
+          <a href="../store/index.html">Merch Store</a>
+          <a href="../community/index.html">Community</a>
+          <a href="../donate/index.html">Donate</a>
+          <a href="../forms/index.html">Register</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Scholarships</div>
+        <div class="footer-links">
+          <a href="#scholarships">Annual Scholarships</a>
+          <a href="#sliding">Sliding Scale Dues</a>
+          <a href="#sponsor-a-wrestler">Sponsor a Wrestler</a>
+          <a href="../forms/index.html#tab-contact">Apply or Inquire</a>
+          <a href="../donate/index.html">Other Ways to Give</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 BGWC Academy Arizona. All rights reserved.</span>
+      <span>USA Wrestling Charter No. 2300052502</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

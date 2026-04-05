@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — BGWC Academy Arizona</title>
+  <link rel="icon" type="image/png" href="../assets/BGWC_Academy_Logo_Transparent.png" />
+  <link rel="stylesheet" href="../assets/site.css" />
+  <style>
+    .mission-section { background: var(--cream); }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .mission-copy h2 {
+      color: var(--navy);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 0.94;
+      margin-bottom: 16px;
+    }
+    .mission-copy p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(51,51,51,0.74);
+      font-size: 1rem;
+      line-height: 1.68;
+      margin-bottom: 16px;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .stat-card {
+      background: var(--navy);
+      border-radius: 20px;
+      padding: 26px 22px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.78);
+    }
+
+    /* standards */
+    .standards-section {
+      background: linear-gradient(180deg, #18345d, #13243B);
+      color: var(--white);
+    }
+    .standards-section .section-head h2 { color: var(--white); }
+    .standards-section .section-head p  { color: rgba(255,255,255,0.78); }
+    .standards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .standard-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,164,74,0.16);
+      border-radius: var(--radius);
+      padding: 30px 24px;
+    }
+    .standard-num {
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+      opacity: 0.4;
+      margin-bottom: 10px;
+    }
+    .standard-card h3 {
+      color: var(--white);
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .standard-card p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.74);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    /* USA Wrestling */
+    .charter-section { background: var(--cream-dark); }
+    .charter-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .charter-copy h2 {
+      color: var(--navy);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      margin-bottom: 14px;
+      line-height: 0.95;
+    }
+    .charter-copy p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(51,51,51,0.74);
+      font-size: 0.97rem;
+      line-height: 1.68;
+      margin-bottom: 16px;
+    }
+    .charter-badge {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      border: 2px solid rgba(201,164,74,0.3);
+    }
+    .charter-badge .badge-num {
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+    }
+    .charter-badge .badge-label {
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.6);
+      margin-top: 6px;
+    }
+    .charter-badge .badge-title {
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-top: 16px;
+    }
+
+    /* contact strip */
+    .contact-strip {
+      background: var(--red);
+      color: var(--white);
+      padding: 56px 0;
+      text-align: center;
+    }
+    .contact-strip h2 {
+      color: var(--white);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .contact-strip p {
+      font-family: Lato, sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.88);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto 28px;
+    }
+    .contact-strip .btn-row { justify-content: center; }
+
+    @media (max-width: 860px) {
+      .mission-grid, .charter-grid { grid-template-columns: 1fr; }
+      .standards-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .standards-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">
+        <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona logo" />
+      </div>
+      <div>
+        <div class="brand-name">BGWC Academy</div>
+        <div class="brand-sub">Arizona Division</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('header').querySelector('nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link" href="../programs/index.html">Programs</a>
+      <a class="nav-link active" href="../about/index.html">About</a>
+      <a class="nav-link" href="../coaches/index.html">Coaches</a>
+      <a class="nav-link" href="../schedule/index.html">Schedule</a>
+      <a class="nav-link" href="../gallery/index.html">Gallery</a>
+      <a class="nav-link" href="../blog/index.html">News</a>
+      <a class="nav-link" href="../store/index.html">Store</a>
+      <a class="nav-link" href="../community/index.html">Community</a>
+      <a class="nav-link" href="../resources/index.html">Resources</a>
+      <a class="nav-link" href="../donate/index.html">Donate</a>
+      <a class="btn btn-primary nav-cta" href="../forms/index.html">Register Now</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="eyebrow">About BGWC Academy Arizona</div>
+    <h1>A Club Built<br><span style="color:var(--gold);">With Purpose.</span></h1>
+    <p>Since 2005, BGWC Academy Arizona has built athletes who understand discipline, carry themselves with character, and compete with the identity of a real wrestling program behind them.</p>
+  </div>
+</div>
+
+<main>
+
+<section class="mission-section">
+  <div class="container">
+    <div class="mission-grid">
+      <div class="mission-copy">
+        <div class="eyebrow">Our Story</div>
+        <h2>Nearly 20 years of building the right kind of athlete.</h2>
+        <p>BGWC Academy Arizona was founded in 2005 with a simple but demanding idea: youth wrestling should develop the whole person. Not just the competitor. The athlete who leaves this program should carry something that lasts longer than any trophy.</p>
+        <p>We are a USA Wrestling chartered club based in Waddell, Arizona. Our two programs — Little Lions and Youth Wrestling — serve athletes at different stages of development but hold them to the same standard of effort, respect, and accountability.</p>
+        <p>This is not a rec program. It is not a drop-in class. BGWC Academy is a club with an identity, records, expectations, and a room that takes itself seriously.</p>
+        <div class="btn-row" style="margin-top:24px;">
+          <a class="btn btn-primary" href="../coaches/index.html">Meet the Coaches</a>
+          <a class="btn btn-outline-navy" href="../programs/index.html">View Programs</a>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">2005</div>
+          <div class="stat-label">Year Founded</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Programs Offered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">AZ</div>
+          <div class="stat-label">Waddell, Arizona</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">USA</div>
+          <div class="stat-label">Wrestling Chartered</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="standards-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">The Standard</div>
+      <h2>What we expect. What you get.</h2>
+      <p>Every family joining BGWC Academy should understand what the room requires and what the room delivers.</p>
+    </div>
+    <div class="standards-grid">
+      <div class="standard-card">
+        <div class="standard-num">01</div>
+        <h3>Show Up Ready</h3>
+        <p>Athletes are expected to be on time, in proper gear, and ready to work from the moment practice begins. Consistency in the room builds consistency on the mat.</p>
+      </div>
+      <div class="standard-card">
+        <div class="standard-num">02</div>
+        <h3>Respect the Room</h3>
+        <p>Coaches, teammates, opponents, and the facility are all treated with respect. The BGWC Academy standard of conduct applies during practice, tournaments, and travel.</p>
+      </div>
+      <div class="standard-card">
+        <div class="standard-num">03</div>
+        <h3>Keep Growing</h3>
+        <p>Athletes are not expected to be perfect. They are expected to put in the effort, receive coaching well, and track their own development seriously over time.</p>
+      </div>
+      <div class="standard-card">
+        <div class="standard-num">04</div>
+        <h3>Parents Support the Room</h3>
+        <p>The coaching staff communicates clearly and expects families to follow the communication policy, stay off the mat, and let the coaches coach.</p>
+      </div>
+      <div class="standard-card">
+        <div class="standard-num">05</div>
+        <h3>Clear Expectations</h3>
+        <p>There are no vague rules here. Athletes and parents know the code of conduct, the visitor policy, the communication guidelines, and what happens when they are not followed.</p>
+      </div>
+      <div class="standard-card">
+        <div class="standard-num">06</div>
+        <h3>Team Identity</h3>
+        <p>You are representing BGWC Academy Arizona. That means something. Athletes carry the crest at tournaments, on the mat, and in how they treat others.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="charter-section">
+  <div class="container">
+    <div class="charter-grid">
+      <div class="charter-copy">
+        <div class="eyebrow">USA Wrestling</div>
+        <h2>A Properly Chartered Club</h2>
+        <p>BGWC Academy Arizona is a fully chartered USA Wrestling club. That means our athletes compete under a recognized charter, our coaches meet USA Wrestling standards, and families can trust that the program is organized and legitimate.</p>
+        <p>USA Wrestling membership gives athletes access to sanctioned tournaments, insurance coverage during club activities, and a pathway into the broader wrestling development system in Arizona and nationally.</p>
+        <a class="btn btn-outline-navy" href="../resources/index.html">Parent Resources &amp; Info</a>
+      </div>
+      <div class="charter-badge">
+        <div class="badge-label">USA Wrestling</div>
+        <div class="badge-title">Chartered Club</div>
+        <div style="height:1px;background:rgba(201,164,74,0.3);margin:18px 0;"></div>
+        <div class="badge-label">Charter Number</div>
+        <div class="badge-num">2300052502</div>
+        <div style="height:1px;background:rgba(201,164,74,0.3);margin:18px 0;"></div>
+        <div class="badge-label">Location</div>
+        <div style="color:rgba(255,255,255,0.78);font-size:0.95rem;margin-top:6px;">17600 W Olive Ave<br>Waddell, AZ 85355</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-strip" id="contact">
+  <div class="container">
+    <h2>Have a question?</h2>
+    <p>The coaching staff is happy to talk with any family who wants to learn more about the program before committing.</p>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="../forms/index.html#tab-inquiry">Program Inquiry</a>
+      <a class="btn btn-outline-white" href="../forms/index.html#tab-contact">Contact the Club</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/BGWC_Academy_Logo_Transparent.png" alt="BGWC Academy Arizona" />
+          <div><div class="footer-title">BGWC Academy Arizona</div></div>
+        </div>
+        <p class="footer-copy">A youth wrestling club built around discipline, character, and long-term development. Est. 2005.</p>
+      </div>
+      <div>
+        <div class="footer-title">Location</div>
+        <p class="footer-copy">17600 West Olive Ave<br>Waddell, AZ 85355</p>
+      </div>
+      <div>
+                <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../programs/index.html">Programs</a>
+          <a href="../about/index.html">About Us</a>
+          <a href="../coaches/index.html">Coaches</a>
+          <a href="../schedule/index.html">Schedule</a>
+          <a href="../gallery/index.html">Gallery</a>
+          <a href="../blog/index.html">News &amp; Blog</a>
+          <a href="../store/index.html">Merch Store</a>
+          <a href="../community/index.html">Community (Band)</a>
+          <a href="../resources/index.html">Resources</a>
+          <a href="../donate/index.html">Donate</a>
+          <a href="../forms/index.html">Register</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">About</div>
+        <div class="footer-links">
+          <a href="#mission">Our Story</a>
+          <a href="#standards">Club Standards</a>
+          <a href="#charter">USA Wrestling</a>
+          <a href="../coaches/index.html">Coaching Staff</a>
+          <a href="#contact">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 BGWC Academy Arizona. All rights reserved.</span>
+      <span>USA Wrestling Charter No. 2300052502</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
